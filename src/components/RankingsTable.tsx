@@ -4,7 +4,6 @@ interface TeamRanking {
   rank: number;
   change: number;
   team: string;
-  logo?: string;
   played: number;
   wins: number;
   draws: number;
@@ -79,15 +78,15 @@ function FormIndicator({ form }: { form: string[] }) {
 
 export function RankingsTable() {
   return (
-    <div className="mat-card-elevated overflow-hidden">
-      <div className="mat-card-header flex items-center justify-between">
+    <div>
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="mat-card-title">Premier League</h2>
-          <p className="mat-card-subtitle">2024-25 Season Standings</p>
+          <h2 className="section-header">Premier League</h2>
+          <p className="section-subheader">2024-25 Season Standings</p>
         </div>
         <div className="flex items-center gap-2">
-          <button className="mat-btn-text text-xs">Standard</button>
-          <button className="mat-btn text-xs text-muted-foreground">Expanded</button>
+          <button className="text-sm font-medium text-foreground px-3 py-1.5 rounded-lg bg-secondary">Standard</button>
+          <button className="text-sm text-muted-foreground px-3 py-1.5 rounded-lg hover:bg-secondary transition-colors">Expanded</button>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -118,7 +117,7 @@ export function RankingsTable() {
                   </div>
                 </td>
                 <td>
-                  <span className="font-medium text-primary hover:underline cursor-pointer">
+                  <span className="font-medium text-foreground hover:text-muted-foreground cursor-pointer transition-colors">
                     {team.team}
                   </span>
                 </td>
@@ -131,7 +130,7 @@ export function RankingsTable() {
                 <td className={team.gd > 0 ? "stat-positive" : team.gd < 0 ? "stat-negative" : ""}>
                   {team.gd > 0 ? "+" : ""}{team.gd}
                 </td>
-                <td className="stat-highlight text-lg">{team.points}</td>
+                <td className="font-semibold text-foreground">{team.points}</td>
                 <td>
                   <span className={`text-sm font-medium ${
                     team.streak.startsWith("W") ? "text-success" : 
