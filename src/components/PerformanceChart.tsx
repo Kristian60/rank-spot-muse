@@ -17,29 +17,29 @@ const data = [
 
 export function PerformanceChart() {
   return (
-    <div className="material-card">
-      <div className="material-card-header">
-        <h2 className="material-card-title">Points Progression</h2>
-        <p className="material-card-subtitle">Top 3 teams over 12 weeks</p>
+    <div className="carbon-tile">
+      <div className="carbon-tile-header">
+        <h2 className="carbon-tile-title">Points Progression</h2>
+        <p className="carbon-tile-subtitle">Top 3 teams over 12 weeks</p>
       </div>
       <div className="p-4">
         <div className="flex gap-6 mb-4 text-xs">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-primary rounded-full" />
+            <div className="w-4 h-[2px] bg-primary" />
             <span className="text-muted-foreground">Man City</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-foreground/60 rounded-full" />
+            <div className="w-4 h-[2px] bg-foreground/50" />
             <span className="text-muted-foreground">Arsenal</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-foreground/30 rounded-full" />
+            <div className="w-4 h-[2px] bg-foreground/25" />
             <span className="text-muted-foreground">Liverpool</span>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={200}>
           <LineChart data={data} margin={{ top: 5, right: 5, bottom: 5, left: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+            <CartesianGrid strokeDasharray="0" stroke="hsl(var(--border))" vertical={false} />
             <XAxis 
               dataKey="week" 
               tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
@@ -55,10 +55,8 @@ export function PerformanceChart() {
             <Tooltip
               contentStyle={{
                 backgroundColor: "hsl(var(--card))",
-                border: "none",
-                borderRadius: "4px",
+                border: "1px solid hsl(var(--border))",
                 fontSize: "12px",
-                boxShadow: "var(--shadow-2)",
               }}
             />
             <Line 
@@ -72,7 +70,7 @@ export function PerformanceChart() {
             <Line 
               type="monotone" 
               dataKey="team2" 
-              stroke="hsl(var(--foreground) / 0.6)" 
+              stroke="hsl(var(--foreground) / 0.5)" 
               strokeWidth={2}
               dot={false}
               name="Arsenal"
@@ -80,7 +78,7 @@ export function PerformanceChart() {
             <Line 
               type="monotone" 
               dataKey="team3" 
-              stroke="hsl(var(--foreground) / 0.3)" 
+              stroke="hsl(var(--foreground) / 0.25)" 
               strokeWidth={2}
               dot={false}
               name="Liverpool"

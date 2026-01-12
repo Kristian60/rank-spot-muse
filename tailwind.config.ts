@@ -66,6 +66,14 @@ export default {
           header: "hsl(var(--table-header))",
           border: "hsl(var(--table-border))",
         },
+        field: {
+          DEFAULT: "hsl(var(--field))",
+          hover: "hsl(var(--field-hover))",
+        },
+        interactive: {
+          DEFAULT: "hsl(var(--interactive))",
+          hover: "hsl(var(--interactive-hover))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

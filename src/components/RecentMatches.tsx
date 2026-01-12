@@ -18,25 +18,25 @@ const matches: Match[] = [
 
 export function RecentMatches() {
   return (
-    <div className="material-card">
-      <div className="material-card-header">
-        <h2 className="material-card-title">Recent Matches</h2>
-        <p className="material-card-subtitle">Latest results</p>
+    <div className="carbon-tile">
+      <div className="carbon-tile-header">
+        <h2 className="carbon-tile-title">Recent Matches</h2>
+        <p className="carbon-tile-subtitle">Latest results</p>
       </div>
       <div>
         {matches.map((match, i) => (
-          <div key={i} className="px-4 py-3 flex items-center hover:bg-secondary/50 transition-colors duration-200 border-b border-border last:border-0">
-            <span className="text-xs text-muted-foreground w-14">{match.date}</span>
+          <div key={i} className="px-4 py-3 flex items-center hover:bg-field transition-colors duration-100 border-b border-border last:border-0">
+            <span className="text-xs text-muted-foreground w-14 font-mono">{match.date}</span>
             <div className="flex-1 flex items-center justify-center gap-4">
               <span className={`text-sm text-right flex-1 ${match.homeScore > match.awayScore ? "font-medium" : "text-muted-foreground"}`}>
                 {match.home}
               </span>
-              <div className="flex items-center gap-2 tabular-nums font-medium text-sm bg-secondary px-3 py-1 rounded-sm">
-                <span className={match.homeScore > match.awayScore ? "text-primary" : ""}>
+              <div className="flex items-center tabular-nums font-semibold text-sm" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+                <span className={`w-6 text-center ${match.homeScore > match.awayScore ? "text-primary" : ""}`}>
                   {match.homeScore}
                 </span>
-                <span className="text-muted-foreground">:</span>
-                <span className={match.awayScore > match.homeScore ? "text-primary" : ""}>
+                <span className="text-muted-foreground mx-1">-</span>
+                <span className={`w-6 text-center ${match.awayScore > match.homeScore ? "text-primary" : ""}`}>
                   {match.awayScore}
                 </span>
               </div>
@@ -44,7 +44,7 @@ export function RecentMatches() {
                 {match.away}
               </span>
             </div>
-            <span className="text-xs text-muted-foreground w-8 text-right">{match.competition}</span>
+            <span className="carbon-tag-interactive">{match.competition}</span>
           </div>
         ))}
       </div>

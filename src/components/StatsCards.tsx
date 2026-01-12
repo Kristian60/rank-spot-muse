@@ -13,15 +13,17 @@ const stats: Stat[] = [
 
 export function StatsCards() {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border">
       {stats.map((stat) => (
-        <div key={stat.label} className="material-card p-5">
-          <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">
+        <div key={stat.label} className="bg-card p-4 hover:bg-field transition-colors duration-100">
+          <div className="text-xs text-muted-foreground mb-1">
             {stat.label}
           </div>
-          <div className="text-3xl font-light tabular-nums text-foreground">{stat.value}</div>
+          <div className="text-2xl font-semibold tabular-nums" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+            {stat.value}
+          </div>
           {stat.detail && (
-            <div className="text-sm text-muted-foreground mt-2">{stat.detail}</div>
+            <div className="text-xs text-muted-foreground mt-2">{stat.detail}</div>
           )}
         </div>
       ))}

@@ -8,22 +8,22 @@ const leagues = [
 
 export function LeagueSelector() {
   return (
-    <div className="material-card">
-      <div className="material-card-header">
-        <h2 className="material-card-title">Leagues</h2>
+    <div className="carbon-tile">
+      <div className="carbon-tile-header">
+        <h2 className="carbon-tile-title">Leagues</h2>
       </div>
-      <div className="py-1">
+      <div>
         {leagues.map((league) => (
           <button
             key={league.code}
-            className={`w-full px-4 py-3 text-left flex items-center justify-between transition-colors duration-200 ${
+            className={`w-full px-4 py-3 text-left flex items-center justify-between transition-colors duration-100 border-b border-border ${
               league.active 
-                ? "bg-primary/10 text-primary border-l-2 border-primary" 
-                : "hover:bg-secondary border-l-2 border-transparent"
+                ? "bg-primary/10 border-l-2 border-l-primary" 
+                : "hover:bg-field border-l-2 border-l-transparent"
             }`}
           >
             <div>
-              <div className={`text-sm ${league.active ? "font-medium" : ""}`}>{league.name}</div>
+              <div className={`text-sm ${league.active ? "text-primary font-medium" : ""}`}>{league.name}</div>
               <div className="text-xs text-muted-foreground">{league.country}</div>
             </div>
             <span className="text-xs text-muted-foreground font-mono">{league.code}</span>
