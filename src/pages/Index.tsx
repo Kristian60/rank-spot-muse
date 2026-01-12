@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
 import { RecentCompetitions } from "@/components/RecentCompetitions";
 import { WorldRankings } from "@/components/WorldRankings";
 
@@ -7,8 +8,10 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="max-w-6xl mx-auto px-8 py-16">
-        <div className="space-y-20">
+      <main className="max-w-6xl mx-auto px-8">
+        <Hero />
+        
+        <div className="space-y-20 pb-16">
           <RecentCompetitions />
           
           <div className="border-t border-border pt-16">
