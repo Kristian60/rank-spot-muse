@@ -69,17 +69,20 @@ const competitions: Competition[] = [
   },
 ];
 
-function PodiumAthlete({ athlete, position }: { athlete: { name: string; country: string; flag: string }; position: 1 | 2 | 3 }) {
-  const heights = { 1: "h-16", 2: "h-12", 3: "h-10" };
-  const order = { 1: "order-2", 2: "order-1", 3: "order-3" };
-  const colors = { 1: "bg-amber-400", 2: "bg-gray-300", 3: "bg-amber-600" };
-  
+const medals = ["🥇", "🥈", "🥉"];
+
+function PodiumList({ athletes, label }: { athletes: { rank: number; name: string; flag: string }[]; label: string }) {
   return (
-    <div className={`flex flex-col items-center ${order[position]}`}>
-      <span className="text-xs mb-1">{athlete.flag}</span>
-      <span className="text-xs font-medium text-foreground truncate max-w-[80px] text-center">{athlete.name.split(' ')[1] || athlete.name}</span>
-      <div className={`w-12 ${heights[position]} ${colors[position]} flex items-center justify-center text-xs font-bold text-foreground/80 mt-1 rounded-t`}>
-        {position}
+    <div>
+      <div className="text-[11px] text-muted-foreground uppercase tracking-widest mb-2">{label}</div>
+      <div className="space-y-1.5">
+        {athletes.map((athlete, i) => (
+          <div key={i} className="flex items-center gap-2 text-sm">
+            <span className="text-base">{medals[i]}</span>
+            <span className="text-sm">{athlete.flag}</span>
+            <span className="text-foreground">{athlete.name}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -88,36 +91,21 @@ function PodiumAthlete({ athlete, position }: { athlete: { name: string; country
 export function RecentCompetitions() {
   return (
     <div>
-      <div className="mb-8">
+      <div className="mb-10">
         <h2 className="section-header">Recent Competitions</h2>
         <p className="section-subheader">Podium finishes from the last 4 major events</p>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
         {competitions.map((comp) => (
-          <div key={comp.name} className="border border-border rounded-lg p-4">
-            <div className="mb-4">
-              <h3 className="font-medium text-foreground text-sm">{comp.name}</h3>
-              <p className="text-xs text-muted-foreground">{comp.date} · {comp.location}</p>
+          <div key={comp.name}>
+            <div className="mb-5">
+              <h3 className="font-medium text-foreground">{comp.name}</h3>
+              <p className="text-sm text-muted-foreground">{comp.date} · {comp.location}</p>
             </div>
             
-            <div className="space-y-4">
-              <div>
-                <div className="text-xs text-muted-foreground mb-2 uppercase tracking-wide">Men</div>
-                <div className="flex items-end justify-center gap-1">
-                  <PodiumAthlete athlete={comp.men[1]} position={2} />
-                  <PodiumAthlete athlete={comp.men[0]} position={1} />
-                  <PodiumAthlete athlete={comp.men[2]} position={3} />
-                </div>
-              </div>
-              
-              <div className="border-t border-border pt-4">
-                <div className="text-xs text-muted-foreground mb-2 uppercase tracking-wide">Women</div>
-                <div className="flex items-end justify-center gap-1">
-                  <PodiumAthlete athlete={comp.women[1]} position={2} />
-                  <PodiumAthlete athlete={comp.women[0]} position={1} />
-                  <PodiumAthlete athlete={comp.women[2]} position={3} />
-                </div>
-              </div>
+            <div className="grid grid-cols-2 gap-6">
+              <PodiumList athletes={comp.men} label="Men" />
+              <PodiumList athletes={comp.women} label="Women" />
             </div>
           </div>
         ))}

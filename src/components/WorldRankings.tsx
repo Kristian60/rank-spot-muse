@@ -38,12 +38,12 @@ const womenAthletes: Athlete[] = [
 function AthleteTable({ athletes, title }: { athletes: Athlete[]; title: string }) {
   return (
     <div>
-      <h3 className="text-sm font-medium text-foreground mb-4">{title}</h3>
+      <h3 className="text-lg font-semibold text-foreground mb-6">{title}</h3>
       <table className="standings-table">
         <thead>
           <tr>
             <th className="w-12">#</th>
-            <th className="min-w-[180px]">Athlete</th>
+            <th className="min-w-[200px]">Athlete</th>
             <th>Points</th>
             <th>Games</th>
             <th>Podiums</th>
@@ -55,7 +55,7 @@ function AthleteTable({ athletes, title }: { athletes: Athlete[]; title: string 
             <tr key={athlete.rank}>
               <td className="text-center font-medium text-foreground">{athlete.rank}</td>
               <td className="text-left">
-                <span className="mr-2">{athlete.flag}</span>
+                <span className="mr-2.5">{athlete.flag}</span>
                 <span className="font-medium text-foreground hover:text-muted-foreground cursor-pointer transition-colors">
                   {athlete.name}
                 </span>
@@ -75,11 +75,11 @@ function AthleteTable({ athletes, title }: { athletes: Athlete[]; title: string 
 export function WorldRankings() {
   return (
     <div>
-      <div className="mb-8">
+      <div className="mb-10">
         <h2 className="section-header">World Rankings</h2>
         <p className="section-subheader">Top 10 athletes globally</p>
       </div>
-      <div className="grid lg:grid-cols-2 gap-10">
+      <div className="space-y-16">
         <AthleteTable athletes={menAthletes} title="Men" />
         <AthleteTable athletes={womenAthletes} title="Women" />
       </div>

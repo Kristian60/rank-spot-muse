@@ -7,18 +7,18 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container py-10">
-        <div className="space-y-12">
+      <main className="max-w-6xl mx-auto px-8 py-16">
+        <div className="space-y-20">
           <RecentCompetitions />
           
-          <div className="border-t border-border pt-10">
+          <div className="border-t border-border pt-16">
             <WorldRankings />
           </div>
         </div>
       </main>
       
-      <footer className="border-t border-border mt-20">
-        <div className="container py-8 text-center text-sm text-muted-foreground">
+      <footer className="border-t border-border mt-24">
+        <div className="max-w-6xl mx-auto px-8 py-10 text-center text-sm text-muted-foreground">
           Data provided for demonstration purposes · Rankings updated weekly
         </div>
       </footer>
