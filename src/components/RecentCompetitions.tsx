@@ -69,8 +69,6 @@ const competitions: Competition[] = [
   },
 ];
 
-const medals = ["🥇", "🥈", "🥉"];
-
 function PodiumList({ athletes, label }: { athletes: { rank: number; name: string; flag: string }[]; label: string }) {
   return (
     <div>
@@ -78,7 +76,7 @@ function PodiumList({ athletes, label }: { athletes: { rank: number; name: strin
       <div className="space-y-1.5">
         {athletes.map((athlete, i) => (
           <div key={i} className="flex items-center gap-2 text-sm">
-            <span className="text-base">{medals[i]}</span>
+            <span className="w-4 text-muted-foreground text-xs">{i + 1}.</span>
             <span className="text-sm">{athlete.flag}</span>
             <span className="text-foreground">{athlete.name}</span>
           </div>
@@ -97,7 +95,7 @@ export function RecentCompetitions() {
       </div>
       <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
         {competitions.map((comp) => (
-          <div key={comp.name}>
+          <div key={comp.name} className="border border-border rounded-lg p-5">
             <div className="mb-5">
               <h3 className="font-medium text-foreground">{comp.name}</h3>
               <p className="text-sm text-muted-foreground">{comp.date} · {comp.location}</p>
