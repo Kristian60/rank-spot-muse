@@ -78,10 +78,10 @@ function FormIndicator({ form }: { form: string[] }) {
 
 export function RankingsTable() {
   return (
-    <div className="border border-border rounded overflow-hidden">
-      <div className="bg-secondary px-4 py-3 border-b border-border">
-        <h2 className="text-sm font-semibold">Premier League Rankings</h2>
-        <p className="text-xs text-muted-foreground mt-0.5">2024-25 Season</p>
+    <div className="material-card">
+      <div className="material-card-header">
+        <h2 className="material-card-title">Premier League Rankings</h2>
+        <p className="material-card-subtitle">2024-25 Season</p>
       </div>
       <div className="overflow-x-auto">
         <table className="data-table">
@@ -104,14 +104,14 @@ export function RankingsTable() {
           <tbody>
             {rankings.map((team) => (
               <tr key={team.rank}>
-                <td className="text-center font-semibold">{team.rank}</td>
+                <td className="text-center font-medium">{team.rank}</td>
                 <td className="text-center">
                   <RankChange change={team.change} />
                 </td>
                 <td>
                   <div className="flex items-center gap-2">
                     <span className="font-medium">{team.team}</span>
-                    <span className="text-2xs text-muted-foreground">{team.country}</span>
+                    <span className="text-xs text-muted-foreground">{team.country}</span>
                   </div>
                 </td>
                 <td className="text-center">{team.played}</td>

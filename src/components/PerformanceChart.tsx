@@ -17,24 +17,24 @@ const data = [
 
 export function PerformanceChart() {
   return (
-    <div className="border border-border rounded overflow-hidden">
-      <div className="bg-secondary px-4 py-3 border-b border-border">
-        <h2 className="text-sm font-semibold">Points Progression</h2>
-        <p className="text-xs text-muted-foreground mt-0.5">Top 3 teams over 12 weeks</p>
+    <div className="material-card">
+      <div className="material-card-header">
+        <h2 className="material-card-title">Points Progression</h2>
+        <p className="material-card-subtitle">Top 3 teams over 12 weeks</p>
       </div>
       <div className="p-4">
-        <div className="flex gap-4 mb-4 text-xs">
+        <div className="flex gap-6 mb-4 text-xs">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-foreground" />
-            <span>Man City</span>
+            <div className="w-3 h-0.5 bg-primary rounded-full" />
+            <span className="text-muted-foreground">Man City</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-muted-foreground" />
-            <span>Arsenal</span>
+            <div className="w-3 h-0.5 bg-foreground/60 rounded-full" />
+            <span className="text-muted-foreground">Arsenal</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-border" style={{ height: 2 }} />
-            <span>Liverpool</span>
+            <div className="w-3 h-0.5 bg-foreground/30 rounded-full" />
+            <span className="text-muted-foreground">Liverpool</span>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={200}>
@@ -42,28 +42,29 @@ export function PerformanceChart() {
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
             <XAxis 
               dataKey="week" 
-              tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+              tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
               axisLine={{ stroke: "hsl(var(--border))" }}
               tickLine={false}
             />
             <YAxis 
-              tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+              tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
               axisLine={{ stroke: "hsl(var(--border))" }}
               tickLine={false}
               width={30}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "hsl(var(--background))",
-                border: "1px solid hsl(var(--border))",
+                backgroundColor: "hsl(var(--card))",
+                border: "none",
                 borderRadius: "4px",
                 fontSize: "12px",
+                boxShadow: "var(--shadow-2)",
               }}
             />
             <Line 
               type="monotone" 
               dataKey="team1" 
-              stroke="hsl(var(--foreground))" 
+              stroke="hsl(var(--primary))" 
               strokeWidth={2}
               dot={false}
               name="Man City"
@@ -71,7 +72,7 @@ export function PerformanceChart() {
             <Line 
               type="monotone" 
               dataKey="team2" 
-              stroke="hsl(var(--muted-foreground))" 
+              stroke="hsl(var(--foreground) / 0.6)" 
               strokeWidth={2}
               dot={false}
               name="Arsenal"
@@ -79,7 +80,7 @@ export function PerformanceChart() {
             <Line 
               type="monotone" 
               dataKey="team3" 
-              stroke="hsl(var(--border))" 
+              stroke="hsl(var(--foreground) / 0.3)" 
               strokeWidth={2}
               dot={false}
               name="Liverpool"

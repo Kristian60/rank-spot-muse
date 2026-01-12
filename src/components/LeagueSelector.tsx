@@ -8,23 +8,25 @@ const leagues = [
 
 export function LeagueSelector() {
   return (
-    <div className="border border-border rounded overflow-hidden">
-      <div className="bg-secondary px-4 py-3 border-b border-border">
-        <h2 className="text-sm font-semibold">Leagues</h2>
+    <div className="material-card">
+      <div className="material-card-header">
+        <h2 className="material-card-title">Leagues</h2>
       </div>
-      <div className="divide-y divide-border">
+      <div className="py-1">
         {leagues.map((league) => (
           <button
             key={league.code}
-            className={`w-full px-4 py-2.5 text-left flex items-center justify-between hover:bg-muted/50 transition-colors ${
-              league.active ? "bg-muted" : ""
+            className={`w-full px-4 py-3 text-left flex items-center justify-between transition-colors duration-200 ${
+              league.active 
+                ? "bg-primary/10 text-primary border-l-2 border-primary" 
+                : "hover:bg-secondary border-l-2 border-transparent"
             }`}
           >
             <div>
-              <div className={`text-sm ${league.active ? "font-semibold" : ""}`}>{league.name}</div>
-              <div className="text-2xs text-muted-foreground">{league.country}</div>
+              <div className={`text-sm ${league.active ? "font-medium" : ""}`}>{league.name}</div>
+              <div className="text-xs text-muted-foreground">{league.country}</div>
             </div>
-            <span className="text-2xs text-muted-foreground font-mono">{league.code}</span>
+            <span className="text-xs text-muted-foreground font-mono">{league.code}</span>
           </button>
         ))}
       </div>
