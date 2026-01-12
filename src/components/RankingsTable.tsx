@@ -4,7 +4,7 @@ interface TeamRanking {
   rank: number;
   change: number;
   team: string;
-  country: string;
+  logo?: string;
   played: number;
   wins: number;
   draws: number;
@@ -14,21 +14,22 @@ interface TeamRanking {
   gd: number;
   points: number;
   form: string[];
+  streak: string;
 }
 
 const rankings: TeamRanking[] = [
-  { rank: 1, change: 0, team: "Manchester City", country: "ENG", played: 38, wins: 28, draws: 5, losses: 5, gf: 94, ga: 33, gd: 61, points: 89, form: ["W", "W", "D", "W", "W"] },
-  { rank: 2, change: 1, team: "Arsenal", country: "ENG", played: 38, wins: 26, draws: 6, losses: 6, gf: 88, ga: 43, gd: 45, points: 84, form: ["W", "W", "W", "L", "W"] },
-  { rank: 3, change: -1, team: "Liverpool", country: "ENG", played: 38, wins: 24, draws: 10, losses: 4, gf: 85, ga: 41, gd: 44, points: 82, form: ["D", "W", "W", "W", "D"] },
-  { rank: 4, change: 2, team: "Aston Villa", country: "ENG", played: 38, wins: 20, draws: 8, losses: 10, gf: 76, ga: 61, gd: 15, points: 68, form: ["W", "L", "W", "W", "W"] },
-  { rank: 5, change: 0, team: "Tottenham", country: "ENG", played: 38, wins: 20, draws: 6, losses: 12, gf: 74, ga: 61, gd: 13, points: 66, form: ["L", "W", "W", "D", "W"] },
-  { rank: 6, change: -2, team: "Chelsea", country: "ENG", played: 38, wins: 18, draws: 9, losses: 11, gf: 77, ga: 63, gd: 14, points: 63, form: ["D", "D", "W", "L", "W"] },
-  { rank: 7, change: 1, team: "Newcastle", country: "ENG", played: 38, wins: 18, draws: 6, losses: 14, gf: 85, ga: 62, gd: 23, points: 60, form: ["W", "W", "L", "W", "L"] },
-  { rank: 8, change: -1, team: "Manchester United", country: "ENG", played: 38, wins: 18, draws: 6, losses: 14, gf: 57, ga: 58, gd: -1, points: 60, form: ["L", "D", "W", "L", "W"] },
-  { rank: 9, change: 0, team: "West Ham", country: "ENG", played: 38, wins: 14, draws: 10, losses: 14, gf: 60, ga: 74, gd: -14, points: 52, form: ["L", "L", "D", "W", "D"] },
-  { rank: 10, change: 3, team: "Crystal Palace", country: "ENG", played: 38, wins: 13, draws: 10, losses: 15, gf: 57, ga: 58, gd: -1, points: 49, form: ["W", "W", "W", "D", "W"] },
-  { rank: 11, change: -1, team: "Brighton", country: "ENG", played: 38, wins: 12, draws: 12, losses: 14, gf: 55, ga: 62, gd: -7, points: 48, form: ["D", "L", "W", "D", "L"] },
-  { rank: 12, change: 0, team: "Bournemouth", country: "ENG", played: 38, wins: 13, draws: 9, losses: 16, gf: 54, ga: 67, gd: -13, points: 48, form: ["W", "L", "L", "W", "D"] },
+  { rank: 1, change: 0, team: "Manchester City", played: 38, wins: 28, draws: 5, losses: 5, gf: 94, ga: 33, gd: 61, points: 89, form: ["W", "W", "D", "W", "W"], streak: "W4" },
+  { rank: 2, change: 1, team: "Arsenal", played: 38, wins: 26, draws: 6, losses: 6, gf: 88, ga: 43, gd: 45, points: 84, form: ["W", "W", "W", "L", "W"], streak: "W2" },
+  { rank: 3, change: -1, team: "Liverpool", played: 38, wins: 24, draws: 10, losses: 4, gf: 85, ga: 41, gd: 44, points: 82, form: ["D", "W", "W", "W", "D"], streak: "D1" },
+  { rank: 4, change: 2, team: "Aston Villa", played: 38, wins: 20, draws: 8, losses: 10, gf: 76, ga: 61, gd: 15, points: 68, form: ["W", "L", "W", "W", "W"], streak: "W3" },
+  { rank: 5, change: 0, team: "Tottenham", played: 38, wins: 20, draws: 6, losses: 12, gf: 74, ga: 61, gd: 13, points: 66, form: ["L", "W", "W", "D", "W"], streak: "W1" },
+  { rank: 6, change: -2, team: "Chelsea", played: 38, wins: 18, draws: 9, losses: 11, gf: 77, ga: 63, gd: 14, points: 63, form: ["D", "D", "W", "L", "W"], streak: "W1" },
+  { rank: 7, change: 1, team: "Newcastle", played: 38, wins: 18, draws: 6, losses: 14, gf: 85, ga: 62, gd: 23, points: 60, form: ["W", "W", "L", "W", "L"], streak: "L1" },
+  { rank: 8, change: -1, team: "Manchester United", played: 38, wins: 18, draws: 6, losses: 14, gf: 57, ga: 58, gd: -1, points: 60, form: ["L", "D", "W", "L", "W"], streak: "W1" },
+  { rank: 9, change: 0, team: "West Ham", played: 38, wins: 14, draws: 10, losses: 14, gf: 60, ga: 74, gd: -14, points: 52, form: ["L", "L", "D", "W", "D"], streak: "D1" },
+  { rank: 10, change: 3, team: "Crystal Palace", played: 38, wins: 13, draws: 10, losses: 15, gf: 57, ga: 58, gd: -1, points: 49, form: ["W", "W", "W", "D", "W"], streak: "W1" },
+  { rank: 11, change: -1, team: "Brighton", played: 38, wins: 12, draws: 12, losses: 14, gf: 55, ga: 62, gd: -7, points: 48, form: ["D", "L", "W", "D", "L"], streak: "L1" },
+  { rank: 12, change: 0, team: "Bournemouth", played: 38, wins: 13, draws: 9, losses: 16, gf: 54, ga: 67, gd: -13, points: 48, form: ["W", "L", "L", "W", "D"], streak: "D1" },
 ];
 
 function RankChange({ change }: { change: number }) {
@@ -57,16 +58,16 @@ function RankChange({ change }: { change: number }) {
 
 function FormIndicator({ form }: { form: string[] }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex gap-1">
       {form.map((result, i) => (
         <span
           key={i}
-          className={`w-5 h-5 flex items-center justify-center text-xs font-medium ${
+          className={`form-indicator ${
             result === "W"
-              ? "bg-success text-success-foreground"
+              ? "form-win"
               : result === "L"
-              ? "bg-destructive text-destructive-foreground"
-              : "bg-muted text-muted-foreground"
+              ? "form-loss"
+              : "form-draw"
           }`}
         >
           {result}
@@ -78,55 +79,68 @@ function FormIndicator({ form }: { form: string[] }) {
 
 export function RankingsTable() {
   return (
-    <div className="carbon-tile">
-      <div className="carbon-tile-header flex items-center justify-between">
+    <div className="mat-card-elevated overflow-hidden">
+      <div className="mat-card-header flex items-center justify-between">
         <div>
-          <h2 className="carbon-tile-title">Premier League Rankings</h2>
-          <p className="carbon-tile-subtitle">2024-25 Season</p>
+          <h2 className="mat-card-title">Premier League</h2>
+          <p className="mat-card-subtitle">2024-25 Season Standings</p>
         </div>
-        <span className="carbon-tag">Live</span>
+        <div className="flex items-center gap-2">
+          <button className="mat-btn-text text-xs">Standard</button>
+          <button className="mat-btn text-xs text-muted-foreground">Expanded</button>
+        </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="data-table">
+        <table className="standings-table">
           <thead>
             <tr>
-              <th className="w-12 text-center">#</th>
-              <th className="w-10"></th>
-              <th className="min-w-[160px]">Team</th>
-              <th className="text-center">MP</th>
-              <th className="text-center">W</th>
-              <th className="text-center">D</th>
-              <th className="text-center">L</th>
-              <th className="text-center">GF</th>
-              <th className="text-center">GA</th>
-              <th className="text-center">GD</th>
-              <th className="text-center">Pts</th>
-              <th className="min-w-[100px]">Form</th>
+              <th className="w-16"></th>
+              <th className="min-w-[200px]">Team</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>MP</th>
+              <th>GF</th>
+              <th>GA</th>
+              <th>GD</th>
+              <th>Pts</th>
+              <th>STRK</th>
+              <th className="min-w-[120px]">L5</th>
             </tr>
           </thead>
           <tbody>
             {rankings.map((team) => (
               <tr key={team.rank}>
-                <td className="text-center font-semibold">{team.rank}</td>
-                <td className="text-center">
-                  <RankChange change={team.change} />
-                </td>
                 <td>
                   <div className="flex items-center gap-2">
-                    <span className="font-medium text-primary hover:underline cursor-pointer">{team.team}</span>
-                    <span className="text-xs text-muted-foreground">{team.country}</span>
+                    <span className="font-medium text-foreground">{team.rank}</span>
+                    <RankChange change={team.change} />
                   </div>
                 </td>
-                <td className="text-center">{team.played}</td>
-                <td className="text-center stat-highlight">{team.wins}</td>
-                <td className="text-center">{team.draws}</td>
-                <td className="text-center">{team.losses}</td>
-                <td className="text-center">{team.gf}</td>
-                <td className="text-center">{team.ga}</td>
-                <td className={`text-center font-medium ${team.gd > 0 ? "rank-change-up" : team.gd < 0 ? "rank-change-down" : ""}`}>
+                <td>
+                  <span className="font-medium text-primary hover:underline cursor-pointer">
+                    {team.team}
+                  </span>
+                </td>
+                <td className="stat-highlight">{team.wins}</td>
+                <td>{team.draws}</td>
+                <td>{team.losses}</td>
+                <td className="text-muted-foreground">{team.played}</td>
+                <td>{team.gf}</td>
+                <td>{team.ga}</td>
+                <td className={team.gd > 0 ? "stat-positive" : team.gd < 0 ? "stat-negative" : ""}>
                   {team.gd > 0 ? "+" : ""}{team.gd}
                 </td>
-                <td className="text-center stat-highlight">{team.points}</td>
+                <td className="stat-highlight text-lg">{team.points}</td>
+                <td>
+                  <span className={`text-sm font-medium ${
+                    team.streak.startsWith("W") ? "text-success" : 
+                    team.streak.startsWith("L") ? "text-destructive" : 
+                    "text-muted-foreground"
+                  }`}>
+                    {team.streak}
+                  </span>
+                </td>
                 <td>
                   <FormIndicator form={team.form} />
                 </td>

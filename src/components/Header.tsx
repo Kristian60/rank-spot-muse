@@ -2,11 +2,11 @@ import { Search, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
-  { label: "Rankings", href: "#", active: true },
+  { label: "Standings", href: "#", active: true },
   { label: "Teams", href: "#" },
   { label: "Players", href: "#" },
-  { label: "Matches", href: "#" },
-  { label: "Statistics", href: "#" },
+  { label: "Schedule", href: "#" },
+  { label: "Stats", href: "#" },
 ];
 
 export function Header() {
@@ -22,19 +22,19 @@ export function Header() {
   }, [isDark]);
 
   return (
-    <header className="border-b-2 border-border bg-card">
-      <div className="container flex items-center h-12">
-        <div className="flex items-center gap-8 flex-1">
-          <h1 className="text-sm font-semibold tracking-tight">RANKINGS</h1>
-          <nav className="hidden md:flex items-center h-full">
+    <header className="bg-transparent">
+      <div className="container flex items-center justify-between h-16">
+        <div className="flex items-center gap-10">
+          <h1 className="text-xl font-bold tracking-tight text-foreground">Standings</h1>
+          <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className={`h-full flex items-center px-4 text-sm transition-colors duration-100 border-b-2 -mb-[2px] ${
+                className={`px-4 py-2 text-sm rounded-lg transition-colors duration-150 ${
                   item.active 
-                    ? "text-foreground border-primary font-medium" 
-                    : "text-muted-foreground border-transparent hover:text-foreground hover:bg-field"
+                    ? "text-primary font-medium bg-primary/5" 
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
                 }`}
               >
                 {item.label}
@@ -42,18 +42,18 @@ export function Header() {
             ))}
           </nav>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="search"
-              placeholder="Search teams..."
-              className="carbon-input w-52 pl-10"
+              placeholder="Search..."
+              className="mat-input w-48 pl-9"
             />
           </div>
           <button
             onClick={() => setIsDark(!isDark)}
-            className="h-12 w-12 flex items-center justify-center hover:bg-field transition-colors duration-100"
+            className="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
             aria-label="Toggle dark mode"
           >
             {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}

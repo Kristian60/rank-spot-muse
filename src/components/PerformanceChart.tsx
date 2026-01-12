@@ -17,29 +17,29 @@ const data = [
 
 export function PerformanceChart() {
   return (
-    <div className="carbon-tile">
-      <div className="carbon-tile-header">
-        <h2 className="carbon-tile-title">Points Progression</h2>
-        <p className="carbon-tile-subtitle">Top 3 teams over 12 weeks</p>
+    <div className="mat-card-elevated">
+      <div className="mat-card-header">
+        <h2 className="mat-card-title">Points Progression</h2>
+        <p className="mat-card-subtitle">Top 3 teams over 12 weeks</p>
       </div>
-      <div className="p-4">
-        <div className="flex gap-6 mb-4 text-xs">
+      <div className="p-5">
+        <div className="flex gap-6 mb-5 text-xs">
           <div className="flex items-center gap-2">
-            <div className="w-4 h-[2px] bg-primary" />
+            <div className="w-4 h-1 rounded-full bg-primary" />
             <span className="text-muted-foreground">Man City</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-[2px] bg-foreground/50" />
+            <div className="w-4 h-1 rounded-full bg-foreground/50" />
             <span className="text-muted-foreground">Arsenal</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-4 h-[2px] bg-foreground/25" />
+            <div className="w-4 h-1 rounded-full bg-foreground/25" />
             <span className="text-muted-foreground">Liverpool</span>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={200}>
           <LineChart data={data} margin={{ top: 5, right: 5, bottom: 5, left: 0 }}>
-            <CartesianGrid strokeDasharray="0" stroke="hsl(var(--border))" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
             <XAxis 
               dataKey="week" 
               tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
@@ -56,7 +56,9 @@ export function PerformanceChart() {
               contentStyle={{
                 backgroundColor: "hsl(var(--card))",
                 border: "1px solid hsl(var(--border))",
+                borderRadius: "8px",
                 fontSize: "12px",
+                boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
               }}
             />
             <Line 
