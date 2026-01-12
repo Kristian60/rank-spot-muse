@@ -1,6 +1,9 @@
 export function Hero() {
   return (
-    <div className="py-20 text-center">
+    <div className="py-20 text-center relative overflow-hidden">
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/50 via-transparent to-transparent -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-transparent via-muted/30 to-transparent rounded-full blur-3xl -z-10" />
       <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-4">
         The Global CrossFit Ranking System
       </h1>
