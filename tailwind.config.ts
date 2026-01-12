@@ -64,7 +64,12 @@ export default {
         table: {
           "row-alt": "hsl(var(--table-row-alt))",
           header: "hsl(var(--table-header))",
+          "header-foreground": "hsl(var(--table-header-foreground))",
           border: "hsl(var(--table-border))",
+        },
+        header: {
+          DEFAULT: "hsl(var(--header))",
+          foreground: "hsl(var(--header-foreground))",
         },
       },
       borderRadius: {

@@ -15,75 +15,67 @@ const data = [
   { week: "W12", team1: 31, team2: 28, team3: 24 },
 ];
 
+const teams = [
+  { key: "team1", name: "Man City", color: "hsl(var(--primary))" },
+  { key: "team2", name: "Arsenal", color: "hsl(var(--destructive))" },
+  { key: "team3", name: "Liverpool", color: "hsl(var(--success))" },
+];
+
 export function PerformanceChart() {
   return (
-    <div className="border border-border rounded overflow-hidden">
-      <div className="bg-secondary px-4 py-3 border-b border-border">
-        <h2 className="text-sm font-semibold">Points Progression</h2>
-        <p className="text-xs text-muted-foreground mt-0.5">Top 3 teams over 12 weeks</p>
+    <div className="bg-card border border-border rounded-lg overflow-hidden shadow-sm">
+      <div className="section-header">
+        <h2 className="section-title">Points Race</h2>
+        <p className="section-subtitle">Top 3 teams · Last 12 weeks</p>
       </div>
       <div className="p-4">
-        <div className="flex gap-4 mb-4 text-xs">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-foreground" />
-            <span>Man City</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-muted-foreground" />
-            <span>Arsenal</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-0.5 bg-border" style={{ height: 2 }} />
-            <span>Liverpool</span>
-          </div>
+        <div className="flex flex-wrap gap-4 mb-4">
+          {teams.map((team) => (
+            <div key={team.key} className="flex items-center gap-2 text-xs">
+              <div 
+                className="w-3 h-1 rounded-full" 
+                style={{ backgroundColor: team.color }}
+              />
+              <span className="font-medium">{team.name}</span>
+            </div>
+          ))}
         </div>
         <ResponsiveContainer width="100%" height={200}>
-          <LineChart data={data} margin={{ top: 5, right: 5, bottom: 5, left: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+          <LineChart data={data} margin={{ top: 5, right: 10, bottom: 5, left: -10 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
             <XAxis 
               dataKey="week" 
               tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
-              axisLine={{ stroke: "hsl(var(--border))" }}
+              axisLine={false}
               tickLine={false}
             />
             <YAxis 
               tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
-              axisLine={{ stroke: "hsl(var(--border))" }}
+              axisLine={false}
               tickLine={false}
-              width={30}
+              width={35}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: "hsl(var(--background))",
+                backgroundColor: "hsl(var(--card))",
                 border: "1px solid hsl(var(--border))",
-                borderRadius: "4px",
+                borderRadius: "8px",
                 fontSize: "12px",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
               }}
+              labelStyle={{ fontWeight: 600, marginBottom: 4 }}
             />
-            <Line 
-              type="monotone" 
-              dataKey="team1" 
-              stroke="hsl(var(--foreground))" 
-              strokeWidth={2}
-              dot={false}
-              name="Man City"
-            />
-            <Line 
-              type="monotone" 
-              dataKey="team2" 
-              stroke="hsl(var(--muted-foreground))" 
-              strokeWidth={2}
-              dot={false}
-              name="Arsenal"
-            />
-            <Line 
-              type="monotone" 
-              dataKey="team3" 
-              stroke="hsl(var(--border))" 
-              strokeWidth={2}
-              dot={false}
-              name="Liverpool"
-            />
+            {teams.map((team) => (
+              <Line 
+                key={team.key}
+                type="monotone" 
+                dataKey={team.key} 
+                stroke={team.color}
+                strokeWidth={2.5}
+                dot={false}
+                name={team.name}
+              />
+            ))}
           </LineChart>
         </ResponsiveContainer>
       </div>
