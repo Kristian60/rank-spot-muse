@@ -30,9 +30,9 @@ const Index = () => {
           <aside className="w-full lg:w-64 space-y-6">
             <LeagueSelector />
             
-            <div className="border border-border rounded overflow-hidden">
-              <div className="bg-secondary px-4 py-3 border-b border-border">
-                <h2 className="text-sm font-semibold">Quick Stats</h2>
+            <div className="border-b border-border">
+              <div className="px-4 py-3 border-b border-border">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Quick Stats</h2>
               </div>
               <div className="p-4 space-y-3 text-sm">
                 <div className="flex justify-between">
@@ -54,7 +54,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="border border-border rounded p-4">
+            <div className="border-b border-border py-4">
               <div className="text-2xs uppercase tracking-wider text-muted-foreground mb-2">
                 Last Updated
               </div>

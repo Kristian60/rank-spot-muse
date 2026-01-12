@@ -1,4 +1,5 @@
-import { Search } from "lucide-react";
+import { Search, Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Rankings", href: "#", active: true },
@@ -9,9 +10,20 @@ const navItems = [
 ];
 
 export function Header() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  }, [isDark]);
+
   return (
-    <header className="border-b border-border">
-      <div className="container flex items-center justify-between h-14">
+    <header className="container">
+      <div className="flex items-center justify-between h-14">
         <div className="flex items-center gap-8">
           <h1 className="text-lg font-bold tracking-tight">RANKINGS</h1>
           <nav className="hidden md:flex items-center gap-6">
@@ -34,9 +46,16 @@ export function Header() {
             <input
               type="search"
               placeholder="Search teams..."
-              className="h-8 w-48 rounded border border-input bg-background pl-8 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+              className="h-8 w-48 border-b border-border bg-transparent pl-8 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-foreground transition-colors"
             />
           </div>
+          <button
+            onClick={() => setIsDark(!isDark)}
+            className="p-2 hover:bg-muted rounded transition-colors"
+            aria-label="Toggle dark mode"
+          >
+            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
         </div>
       </div>
     </header>
