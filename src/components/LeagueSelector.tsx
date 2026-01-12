@@ -8,23 +8,35 @@ const leagues = [
 
 export function LeagueSelector() {
   return (
-    <div className="border border-border rounded overflow-hidden">
-      <div className="bg-secondary px-4 py-3 border-b border-border">
-        <h2 className="text-sm font-semibold">Leagues</h2>
+    <div className="bg-card border border-border rounded-lg overflow-hidden shadow-sm">
+      <div className="section-header">
+        <h2 className="section-title">Leagues</h2>
       </div>
-      <div className="divide-y divide-border">
+      <div className="p-1">
         {leagues.map((league) => (
           <button
             key={league.code}
-            className={`w-full px-4 py-2.5 text-left flex items-center justify-between hover:bg-muted/50 transition-colors ${
-              league.active ? "bg-muted" : ""
+            className={`w-full px-3 py-2.5 text-left flex items-center justify-between rounded-md transition-colors ${
+              league.active 
+                ? "bg-primary text-primary-foreground" 
+                : "hover:bg-muted"
             }`}
           >
-            <div>
-              <div className={`text-sm ${league.active ? "font-semibold" : ""}`}>{league.name}</div>
-              <div className="text-2xs text-muted-foreground">{league.country}</div>
+            <div className="flex items-center gap-3">
+              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-2xs font-bold ${
+                league.active 
+                  ? "bg-primary-foreground/20 text-primary-foreground" 
+                  : "bg-muted text-muted-foreground"
+              }`}>
+                {league.code}
+              </div>
+              <div>
+                <div className={`text-sm font-semibold ${league.active ? "" : ""}`}>{league.name}</div>
+                <div className={`text-2xs ${league.active ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                  {league.country}
+                </div>
+              </div>
             </div>
-            <span className="text-2xs text-muted-foreground font-mono">{league.code}</span>
           </button>
         ))}
       </div>
