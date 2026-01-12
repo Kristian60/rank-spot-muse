@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,114 +7,99 @@
 @layer base {
   :root {
     --background: 0 0% 98%;
-    --foreground: 0 0% 9%;
+    --foreground: 220 13% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 220 13% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    --popover-foreground: 220 13% 18%;
 
-    --primary: 214 84% 56%;
+    --primary: 214 100% 40%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 13% 18%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 13% 18%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 161 94% 30%;
+    --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
 
-    --border: 0 0% 87%;
-    --input: 0 0% 87%;
-    --ring: 214 84% 56%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 214 100% 40%;
 
-    --radius: 0;
+    --radius: 0.5rem;
 
-    /* Data table specific */
-    --table-row-alt: 0 0% 98%;
-    --table-header: 0 0% 96%;
-    --table-border: 0 0% 87%;
+    /* Table specific */
+    --table-header-bg: 220 14% 96%;
+    --table-row-hover: 220 14% 97%;
+    --table-divider: 220 13% 91%;
     
     /* Rank indicators */
-    --rank-up: 161 94% 30%;
-    --rank-down: 0 72% 51%;
-    --rank-neutral: 0 0% 55%;
+    --rank-up: 142 76% 36%;
+    --rank-down: 0 84% 60%;
+    --rank-neutral: 220 9% 60%;
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 0 0% 9%;
-    --sidebar-primary: 214 84% 56%;
+    --sidebar-foreground: 220 13% 18%;
+    --sidebar-primary: 214 100% 40%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 9%;
-    --sidebar-border: 0 0% 87%;
-    --sidebar-ring: 214 84% 56%;
-
-    /* Carbon specific */
-    --interactive: 214 84% 56%;
-    --interactive-hover: 214 84% 46%;
-    --field: 0 0% 96%;
-    --field-hover: 0 0% 92%;
-    --layer: 0 0% 100%;
-    --layer-hover: 0 0% 96%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 13% 18%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 214 100% 40%;
   }
 
   .dark {
-    --background: 210 11% 10%;
-    --foreground: 0 0% 96%;
+    --background: 220 13% 10%;
+    --foreground: 220 14% 96%;
 
-    --card: 210 10% 14%;
-    --card-foreground: 0 0% 96%;
+    --card: 220 13% 14%;
+    --card-foreground: 220 14% 96%;
 
-    --popover: 210 10% 14%;
-    --popover-foreground: 0 0% 96%;
+    --popover: 220 13% 14%;
+    --popover-foreground: 220 14% 96%;
 
-    --primary: 214 84% 56%;
+    --primary: 214 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 10% 18%;
-    --secondary-foreground: 0 0% 96%;
+    --secondary: 220 13% 18%;
+    --secondary-foreground: 220 14% 96%;
 
-    --muted: 210 10% 18%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 220 13% 18%;
+    --muted-foreground: 220 9% 60%;
 
-    --accent: 210 10% 18%;
-    --accent-foreground: 0 0% 96%;
+    --accent: 220 13% 18%;
+    --accent-foreground: 220 14% 96%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 10% 22%;
-    --input: 210 10% 22%;
-    --ring: 214 84% 56%;
+    --border: 220 13% 22%;
+    --input: 220 13% 22%;
+    --ring: 214 100% 50%;
 
-    --table-row-alt: 210 10% 12%;
-    --table-header: 210 10% 18%;
-    --table-border: 210 10% 22%;
+    --table-header-bg: 220 13% 18%;
+    --table-row-hover: 220 13% 16%;
+    --table-divider: 220 13% 22%;
 
-    --sidebar-background: 210 10% 14%;
-    --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 214 84% 56%;
+    --sidebar-background: 220 13% 14%;
+    --sidebar-foreground: 220 14% 96%;
+    --sidebar-primary: 214 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 10% 18%;
-    --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 210 10% 22%;
-    --sidebar-ring: 214 84% 56%;
-
-    --interactive: 214 84% 56%;
-    --interactive-hover: 214 84% 66%;
-    --field: 210 10% 18%;
-    --field-hover: 210 10% 22%;
-    --layer: 210 10% 14%;
-    --layer-hover: 210 10% 18%;
+    --sidebar-accent: 220 13% 18%;
+    --sidebar-accent-foreground: 220 14% 96%;
+    --sidebar-border: 220 13% 22%;
+    --sidebar-ring: 214 100% 50%;
   }
 }
 
@@ -125,10 +110,9 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-feature-settings: "tnum" 1;
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    line-height: 1.43;
+    line-height: 1.5;
   }
 
   .tabular-nums {
@@ -137,44 +121,67 @@
 }
 
 @layer components {
-  /* Carbon tile */
-  .carbon-tile {
-    @apply bg-card border-t-0 border-l-0 border-r-0 border-b-[3px] border-border;
+  /* Material Card */
+  .mat-card {
+    @apply bg-card rounded-lg shadow-sm;
   }
 
-  .carbon-tile-header {
-    @apply px-4 py-3 bg-secondary border-b border-border;
+  .mat-card-elevated {
+    @apply bg-card rounded-lg;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
   }
 
-  .carbon-tile-title {
-    @apply text-sm font-semibold text-foreground;
+  .mat-card-header {
+    @apply px-6 py-4 border-b border-border;
   }
 
-  .carbon-tile-subtitle {
-    @apply text-xs text-muted-foreground mt-0.5;
+  .mat-card-title {
+    @apply text-lg font-medium text-foreground;
   }
 
-  /* Data table - Carbon style */
-  .data-table {
+  .mat-card-subtitle {
+    @apply text-sm text-muted-foreground mt-0.5;
+  }
+
+  /* MLB-inspired Data Table */
+  .standings-table {
     @apply w-full text-sm;
   }
 
-  .data-table th {
-    @apply text-left text-xs font-semibold text-muted-foreground uppercase tracking-wide px-4 py-3 bg-secondary border-b-2 border-border;
+  .standings-table th {
+    @apply text-xs font-medium text-muted-foreground uppercase tracking-wider px-4 py-3 text-center;
+    background: hsl(var(--table-header-bg));
   }
 
-  .data-table td {
-    @apply px-4 py-3 border-b border-border tabular-nums;
+  .standings-table th:first-child,
+  .standings-table th:nth-child(2) {
+    @apply text-left;
   }
 
-  .data-table tbody tr {
-    @apply transition-colors duration-100;
+  .standings-table td {
+    @apply px-4 py-4 text-center tabular-nums border-b border-border;
   }
 
-  .data-table tbody tr:hover td {
-    @apply bg-field;
+  .standings-table td:first-child,
+  .standings-table td:nth-child(2) {
+    @apply text-left;
   }
 
+  .standings-table tbody tr {
+    @apply transition-colors duration-150;
+  }
+
+  .standings-table tbody tr:hover td {
+    background: hsl(var(--table-row-hover));
+  }
+
+  /* Division header row - MLB style */
+  .standings-division-header {
+    @apply text-xs font-medium uppercase tracking-wider text-muted-foreground;
+    background: hsl(var(--table-header-bg));
+  }
+
+  /* Rank indicators */
   .rank-change-up {
     @apply text-success;
   }
@@ -188,45 +195,62 @@
   }
 
   .stat-highlight {
-    @apply font-semibold;
+    @apply font-medium;
   }
 
-  /* Carbon button */
-  .carbon-btn-primary {
-    @apply px-4 py-3 bg-primary text-primary-foreground text-sm font-normal transition-colors duration-100;
+  .stat-positive {
+    @apply text-success font-medium;
   }
 
-  .carbon-btn-primary:hover {
-    @apply bg-[hsl(var(--interactive-hover))];
+  .stat-negative {
+    @apply text-destructive font-medium;
   }
 
-  .carbon-btn-ghost {
-    @apply px-4 py-3 text-primary text-sm font-normal transition-colors duration-100;
+  /* Material Button */
+  .mat-btn {
+    @apply px-4 py-2 rounded text-sm font-medium transition-all duration-150;
   }
 
-  .carbon-btn-ghost:hover {
-    @apply bg-field;
+  .mat-btn-primary {
+    @apply mat-btn bg-primary text-primary-foreground hover:opacity-90;
   }
 
-  /* Carbon text input */
-  .carbon-input {
-    @apply w-full h-10 px-4 bg-field border-b-2 border-muted-foreground/30 text-sm placeholder:text-muted-foreground transition-colors duration-100;
+  .mat-btn-text {
+    @apply mat-btn text-primary hover:bg-primary/10;
   }
 
-  .carbon-input:hover {
-    @apply bg-field-hover;
+  /* Material Input */
+  .mat-input {
+    @apply w-full h-10 px-3 rounded bg-secondary border-0 text-sm placeholder:text-muted-foreground transition-all duration-150;
   }
 
-  .carbon-input:focus {
-    @apply outline-none border-primary;
+  .mat-input:focus {
+    @apply outline-none ring-2 ring-primary/20 bg-card;
   }
 
-  /* Carbon tag */
-  .carbon-tag {
-    @apply inline-flex items-center h-6 px-2 text-xs font-normal bg-secondary text-foreground;
+  /* Material Chip */
+  .mat-chip {
+    @apply inline-flex items-center h-7 px-3 rounded-full text-xs font-medium bg-secondary text-foreground;
   }
 
-  .carbon-tag-interactive {
-    @apply inline-flex items-center h-6 px-2 text-xs font-normal bg-primary/10 text-primary;
+  .mat-chip-primary {
+    @apply inline-flex items-center h-7 px-3 rounded-full text-xs font-medium bg-primary/10 text-primary;
+  }
+
+  /* Form indicator - MLB style */
+  .form-indicator {
+    @apply w-5 h-5 rounded-sm flex items-center justify-center text-xs font-medium;
+  }
+
+  .form-win {
+    @apply bg-success text-success-foreground;
+  }
+
+  .form-loss {
+    @apply bg-destructive text-destructive-foreground;
+  }
+
+  .form-draw {
+    @apply bg-muted text-muted-foreground;
   }
 }

@@ -21,33 +21,35 @@ const players: Player[] = [
 
 export function TopScorers() {
   return (
-    <div className="carbon-tile">
-      <div className="carbon-tile-header">
-        <h2 className="carbon-tile-title">Top Scorers</h2>
-        <p className="carbon-tile-subtitle">Leading goal scorers</p>
+    <div className="mat-card-elevated overflow-hidden">
+      <div className="mat-card-header">
+        <h2 className="mat-card-title">Top Scorers</h2>
+        <p className="mat-card-subtitle">Leading goal scorers this season</p>
       </div>
-      <table className="data-table">
+      <table className="standings-table">
         <thead>
           <tr>
-            <th className="w-8 text-center">#</th>
-            <th>Player</th>
+            <th className="w-12">#</th>
+            <th className="min-w-[160px]">Player</th>
             <th>Team</th>
-            <th className="text-center">G</th>
-            <th className="text-center">A</th>
-            <th className="text-center">MP</th>
-            <th className="text-center">Mins</th>
+            <th>G</th>
+            <th>A</th>
+            <th>MP</th>
+            <th>Mins</th>
           </tr>
         </thead>
         <tbody>
           {players.map((player) => (
             <tr key={player.rank}>
-              <td className="text-center font-semibold">{player.rank}</td>
-              <td className="font-medium text-primary hover:underline cursor-pointer">{player.name}</td>
-              <td className="text-muted-foreground">{player.team}</td>
-              <td className="text-center stat-highlight">{player.goals}</td>
-              <td className="text-center">{player.assists}</td>
-              <td className="text-center">{player.matches}</td>
-              <td className="text-center text-muted-foreground font-mono">{player.mins}</td>
+              <td className="text-center font-medium">{player.rank}</td>
+              <td className="text-left font-medium text-primary hover:underline cursor-pointer">
+                {player.name}
+              </td>
+              <td className="text-left text-muted-foreground">{player.team}</td>
+              <td className="stat-highlight">{player.goals}</td>
+              <td>{player.assists}</td>
+              <td className="text-muted-foreground">{player.matches}</td>
+              <td className="text-muted-foreground">{player.mins}</td>
             </tr>
           ))}
         </tbody>
