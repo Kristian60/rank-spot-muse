@@ -21,10 +21,10 @@ const players: Player[] = [
 
 export function TopScorers() {
   return (
-    <div className="mat-card-elevated overflow-hidden">
-      <div className="mat-card-header">
-        <h2 className="mat-card-title">Top Scorers</h2>
-        <p className="mat-card-subtitle">Leading goal scorers this season</p>
+    <div>
+      <div className="mb-6">
+        <h2 className="section-header">Top Scorers</h2>
+        <p className="section-subheader">Leading goal scorers this season</p>
       </div>
       <table className="standings-table">
         <thead>
@@ -41,8 +41,8 @@ export function TopScorers() {
         <tbody>
           {players.map((player) => (
             <tr key={player.rank}>
-              <td className="text-center font-medium">{player.rank}</td>
-              <td className="text-left font-medium text-primary hover:underline cursor-pointer">
+              <td className="text-center font-medium text-foreground">{player.rank}</td>
+              <td className="text-left font-medium text-foreground hover:text-muted-foreground cursor-pointer transition-colors">
                 {player.name}
               </td>
               <td className="text-left text-muted-foreground">{player.team}</td>

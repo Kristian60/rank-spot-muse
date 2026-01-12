@@ -18,33 +18,33 @@ const matches: Match[] = [
 
 export function RecentMatches() {
   return (
-    <div className="mat-card-elevated">
-      <div className="mat-card-header">
-        <h2 className="mat-card-title">Recent Matches</h2>
-        <p className="mat-card-subtitle">Latest results</p>
+    <div>
+      <div className="mb-5">
+        <h2 className="section-header">Recent Matches</h2>
+        <p className="section-subheader">Latest results</p>
       </div>
-      <div>
+      <div className="space-y-0">
         {matches.map((match, i) => (
-          <div key={i} className="px-5 py-4 flex items-center hover:bg-secondary transition-colors duration-150 border-b border-border last:border-0">
+          <div key={i} className="py-3 flex items-center border-b border-border last:border-0">
             <span className="text-xs text-muted-foreground w-14">{match.date}</span>
             <div className="flex-1 flex items-center justify-center gap-4">
-              <span className={`text-sm text-right flex-1 ${match.homeScore > match.awayScore ? "font-medium" : "text-muted-foreground"}`}>
+              <span className={`text-sm text-right flex-1 ${match.homeScore > match.awayScore ? "font-medium text-foreground" : "text-muted-foreground"}`}>
                 {match.home}
               </span>
-              <div className="flex items-center tabular-nums font-bold text-base">
-                <span className={`w-6 text-center ${match.homeScore > match.awayScore ? "text-success" : ""}`}>
+              <div className="flex items-center tabular-nums font-semibold text-base">
+                <span className={`w-6 text-center ${match.homeScore > match.awayScore ? "text-foreground" : "text-muted-foreground"}`}>
                   {match.homeScore}
                 </span>
-                <span className="text-muted-foreground mx-2">-</span>
-                <span className={`w-6 text-center ${match.awayScore > match.homeScore ? "text-success" : ""}`}>
+                <span className="text-muted-foreground mx-2">–</span>
+                <span className={`w-6 text-center ${match.awayScore > match.homeScore ? "text-foreground" : "text-muted-foreground"}`}>
                   {match.awayScore}
                 </span>
               </div>
-              <span className={`text-sm text-left flex-1 ${match.awayScore > match.homeScore ? "font-medium" : "text-muted-foreground"}`}>
+              <span className={`text-sm text-left flex-1 ${match.awayScore > match.homeScore ? "font-medium text-foreground" : "text-muted-foreground"}`}>
                 {match.away}
               </span>
             </div>
-            <span className="mat-chip-primary">{match.competition}</span>
+            <span className="chip">{match.competition}</span>
           </div>
         ))}
       </div>

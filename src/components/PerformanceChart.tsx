@@ -17,77 +17,74 @@ const data = [
 
 export function PerformanceChart() {
   return (
-    <div className="mat-card-elevated">
-      <div className="mat-card-header">
-        <h2 className="mat-card-title">Points Progression</h2>
-        <p className="mat-card-subtitle">Top 3 teams over 12 weeks</p>
+    <div>
+      <div className="mb-5">
+        <h2 className="section-header">Points Progression</h2>
+        <p className="section-subheader">Top 3 teams over 12 weeks</p>
       </div>
-      <div className="p-5">
-        <div className="flex gap-6 mb-5 text-xs">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-1 rounded-full bg-primary" />
-            <span className="text-muted-foreground">Man City</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-1 rounded-full bg-foreground/50" />
-            <span className="text-muted-foreground">Arsenal</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-1 rounded-full bg-foreground/25" />
-            <span className="text-muted-foreground">Liverpool</span>
-          </div>
+      <div className="flex gap-6 mb-4 text-xs">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-foreground" />
+          <span className="text-muted-foreground">Man City</span>
         </div>
-        <ResponsiveContainer width="100%" height={200}>
-          <LineChart data={data} margin={{ top: 5, right: 5, bottom: 5, left: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
-            <XAxis 
-              dataKey="week" 
-              tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
-              axisLine={{ stroke: "hsl(var(--border))" }}
-              tickLine={false}
-            />
-            <YAxis 
-              tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
-              axisLine={{ stroke: "hsl(var(--border))" }}
-              tickLine={false}
-              width={30}
-            />
-            <Tooltip
-              contentStyle={{
-                backgroundColor: "hsl(var(--card))",
-                border: "1px solid hsl(var(--border))",
-                borderRadius: "8px",
-                fontSize: "12px",
-                boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
-              }}
-            />
-            <Line 
-              type="monotone" 
-              dataKey="team1" 
-              stroke="hsl(var(--primary))" 
-              strokeWidth={2}
-              dot={false}
-              name="Man City"
-            />
-            <Line 
-              type="monotone" 
-              dataKey="team2" 
-              stroke="hsl(var(--foreground) / 0.5)" 
-              strokeWidth={2}
-              dot={false}
-              name="Arsenal"
-            />
-            <Line 
-              type="monotone" 
-              dataKey="team3" 
-              stroke="hsl(var(--foreground) / 0.25)" 
-              strokeWidth={2}
-              dot={false}
-              name="Liverpool"
-            />
-          </LineChart>
-        </ResponsiveContainer>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-foreground/50" />
+          <span className="text-muted-foreground">Arsenal</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-foreground/25" />
+          <span className="text-muted-foreground">Liverpool</span>
+        </div>
       </div>
+      <ResponsiveContainer width="100%" height={200}>
+        <LineChart data={data} margin={{ top: 5, right: 5, bottom: 5, left: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+          <XAxis 
+            dataKey="week" 
+            tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+            axisLine={{ stroke: "hsl(var(--border))" }}
+            tickLine={false}
+          />
+          <YAxis 
+            tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+            axisLine={{ stroke: "hsl(var(--border))" }}
+            tickLine={false}
+            width={30}
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "hsl(var(--background))",
+              border: "1px solid hsl(var(--border))",
+              borderRadius: "8px",
+              fontSize: "12px",
+            }}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="team1" 
+            stroke="hsl(var(--foreground))" 
+            strokeWidth={2}
+            dot={false}
+            name="Man City"
+          />
+          <Line 
+            type="monotone" 
+            dataKey="team2" 
+            stroke="hsl(var(--foreground) / 0.5)" 
+            strokeWidth={2}
+            dot={false}
+            name="Arsenal"
+          />
+          <Line 
+            type="monotone" 
+            dataKey="team3" 
+            stroke="hsl(var(--foreground) / 0.25)" 
+            strokeWidth={2}
+            dot={false}
+            name="Liverpool"
+          />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 }
