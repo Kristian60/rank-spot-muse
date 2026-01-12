@@ -101,9 +101,11 @@ export function RecentCompetitions() {
               <p className="text-sm text-muted-foreground">{comp.date} · {comp.location}</p>
             </div>
             
-            <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-4">
               <PodiumList athletes={comp.men} label="Men" />
-              <PodiumList athletes={comp.women} label="Women" />
+              <div className="border-t border-border pt-4">
+                <PodiumList athletes={comp.women} label="Women" />
+              </div>
             </div>
           </div>
         ))}
