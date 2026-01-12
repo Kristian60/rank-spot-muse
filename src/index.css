@@ -4,109 +4,100 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 220 20% 10%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card-foreground: 0 0% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 0 0% 4%;
 
-    --primary: 220 80% 20%;
+    --primary: 0 0% 4%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 15% 94%;
-    --secondary-foreground: 220 20% 10%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 4%;
 
-    --muted: 220 10% 92%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 220 80% 20%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 4%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --success: 160 84% 39%;
+    --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
 
-    --border: 220 10% 88%;
-    --input: 220 10% 88%;
-    --ring: 220 80% 20%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 4%;
 
-    --radius: 0.375rem;
+    --radius: 0.25rem;
 
     /* Data table specific */
-    --table-row-alt: 220 15% 97%;
-    --table-header: 220 80% 20%;
-    --table-header-foreground: 0 0% 100%;
-    --table-border: 220 10% 90%;
+    --table-row-alt: 0 0% 98%;
+    --table-header: 0 0% 96%;
+    --table-border: 0 0% 88%;
     
     /* Rank indicators */
-    --rank-up: 160 84% 39%;
-    --rank-down: 0 72% 51%;
-    --rank-neutral: 220 10% 55%;
+    --rank-up: 142 76% 36%;
+    --rank-down: 0 84% 60%;
+    --rank-neutral: 0 0% 60%;
 
-    /* Header */
-    --header: 220 80% 12%;
-    --header-foreground: 0 0% 100%;
-
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 220 20% 10%;
-    --sidebar-primary: 220 80% 20%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 4%;
+    --sidebar-primary: 0 0% 4%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 94%;
-    --sidebar-accent-foreground: 220 20% 10%;
-    --sidebar-border: 220 10% 88%;
-    --sidebar-ring: 220 80% 20%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 4%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 4%;
   }
 
   .dark {
-    --background: 220 20% 7%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 96%;
 
-    --card: 220 20% 10%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 96%;
 
-    --popover: 220 20% 10%;
+    --popover: 0 0% 6%;
     --popover-foreground: 0 0% 96%;
 
-    --primary: 210 100% 52%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 220 15% 18%;
+    --secondary: 0 0% 14%;
     --secondary-foreground: 0 0% 96%;
 
-    --muted: 220 15% 18%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 210 100% 52%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 96%;
 
-    --destructive: 0 62% 50%;
+    --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 96%;
 
-    --border: 220 15% 22%;
-    --input: 220 15% 22%;
-    --ring: 210 100% 52%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 80%;
 
-    --table-row-alt: 220 20% 12%;
-    --table-header: 220 15% 15%;
-    --table-header-foreground: 0 0% 96%;
-    --table-border: 220 15% 20%;
+    --table-row-alt: 0 0% 8%;
+    --table-header: 0 0% 10%;
+    --table-border: 0 0% 16%;
 
-    --header: 220 25% 10%;
-    --header-foreground: 0 0% 100%;
-
-    --sidebar-background: 220 20% 10%;
+    --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 210 100% 52%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 18%;
+    --sidebar-primary: 0 0% 96%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 14%;
     --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 220 15% 22%;
-    --sidebar-ring: 210 100% 52%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 0 0% 80%;
   }
 }
 
@@ -132,15 +123,19 @@
   }
 
   .data-table th {
-    @apply bg-table-header text-table-header-foreground text-left font-bold text-[11px] uppercase tracking-wider px-3 py-2.5;
+    @apply bg-table-header text-left font-semibold text-xs uppercase tracking-wider px-3 py-2 border-b border-table-border;
   }
 
   .data-table td {
-    @apply px-3 py-2.5 border-b border-table-border tabular-nums text-[13px];
+    @apply px-3 py-2 border-b border-table-border tabular-nums;
   }
 
-  .data-table tbody tr:hover td {
-    @apply bg-muted/60;
+  .data-table tr:nth-child(even) td {
+    @apply bg-table-row-alt;
+  }
+
+  .data-table tr:hover td {
+    @apply bg-muted;
   }
 
   .rank-change-up {
@@ -156,18 +151,6 @@
   }
 
   .stat-highlight {
-    @apply font-bold;
-  }
-
-  .section-header {
-    @apply bg-primary text-primary-foreground px-4 py-3;
-  }
-
-  .section-title {
-    @apply text-sm font-bold uppercase tracking-wide;
-  }
-
-  .section-subtitle {
-    @apply text-xs text-primary-foreground/70 mt-0.5;
+    @apply font-semibold;
   }
 }

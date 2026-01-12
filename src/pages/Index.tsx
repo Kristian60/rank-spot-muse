@@ -13,38 +13,6 @@ const Index = () => {
       
       <main className="container py-6">
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Sidebar */}
-          <aside className="w-full lg:w-56 space-y-4 lg:order-first order-last">
-            <LeagueSelector />
-            
-            <div className="bg-card border border-border rounded-lg overflow-hidden shadow-sm">
-              <div className="section-header">
-                <h2 className="section-title">Season Info</h2>
-              </div>
-              <div className="p-4 space-y-3 text-sm">
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground text-xs">Matchday</span>
-                  <span className="font-bold">26 of 38</span>
-                </div>
-                <div className="w-full bg-muted rounded-full h-1.5">
-                  <div className="bg-primary h-1.5 rounded-full" style={{ width: "68%" }} />
-                </div>
-                <div className="flex justify-between items-center pt-2">
-                  <span className="text-muted-foreground text-xs">Season</span>
-                  <span className="font-bold">2024-25</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground text-xs">Teams</span>
-                  <span className="font-bold">20</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground text-xs">Avg Goals</span>
-                  <span className="font-bold">2.78</span>
-                </div>
-              </div>
-            </div>
-          </aside>
-          
           {/* Main content */}
           <div className="flex-1 space-y-6">
             <StatsCards />
@@ -57,22 +25,49 @@ const Index = () => {
             
             <TopScorers />
           </div>
+          
+          {/* Sidebar */}
+          <aside className="w-full lg:w-64 space-y-6">
+            <LeagueSelector />
+            
+            <div className="border border-border rounded overflow-hidden">
+              <div className="bg-secondary px-4 py-3 border-b border-border">
+                <h2 className="text-sm font-semibold">Quick Stats</h2>
+              </div>
+              <div className="p-4 space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Matchday</span>
+                  <span className="font-semibold">26 of 38</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Season</span>
+                  <span className="font-semibold">2024-25</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Teams</span>
+                  <span className="font-semibold">20</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Avg Goals</span>
+                  <span className="font-semibold">2.78</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="border border-border rounded p-4">
+              <div className="text-2xs uppercase tracking-wider text-muted-foreground mb-2">
+                Last Updated
+              </div>
+              <div className="text-sm font-medium">Jan 12, 2026</div>
+              <div className="text-2xs text-muted-foreground">18:45 UTC</div>
+            </div>
+          </aside>
         </div>
       </main>
       
-      <footer className="bg-header text-header-foreground mt-12">
-        <div className="container py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-white rounded flex items-center justify-center">
-                <span className="text-header font-black text-2xs">SR</span>
-              </div>
-              <span className="font-bold text-sm">SPORTS RANKINGS</span>
-            </div>
-            <div className="text-xs text-header-foreground/60">
-              Data provided for demonstration purposes · Updated weekly
-            </div>
-          </div>
+      <footer className="border-t border-border mt-12">
+        <div className="container py-4 text-center text-xs text-muted-foreground">
+          Data provided for demonstration purposes · Rankings updated weekly
         </div>
       </footer>
     </div>

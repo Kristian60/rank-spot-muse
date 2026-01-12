@@ -4,76 +4,48 @@ interface Match {
   homeScore: number;
   awayScore: number;
   date: string;
-  time: string;
-  status: "FT" | "LIVE" | "HT";
+  competition: string;
 }
 
 const matches: Match[] = [
-  { home: "Arsenal", away: "Chelsea", homeScore: 3, awayScore: 1, date: "Jan 12", time: "17:30", status: "FT" },
-  { home: "Liverpool", away: "Man United", homeScore: 2, awayScore: 2, date: "Jan 12", time: "15:00", status: "FT" },
-  { home: "Man City", away: "Tottenham", homeScore: 4, awayScore: 0, date: "Jan 11", time: "20:00", status: "FT" },
-  { home: "Newcastle", away: "Brighton", homeScore: 1, awayScore: 0, date: "Jan 11", time: "17:30", status: "FT" },
-  { home: "Aston Villa", away: "West Ham", homeScore: 2, awayScore: 1, date: "Jan 11", time: "15:00", status: "FT" },
+  { home: "Arsenal", away: "Chelsea", homeScore: 3, awayScore: 1, date: "Jan 12", competition: "PL" },
+  { home: "Liverpool", away: "Man United", homeScore: 2, awayScore: 2, date: "Jan 12", competition: "PL" },
+  { home: "Man City", away: "Tottenham", homeScore: 4, awayScore: 0, date: "Jan 11", competition: "PL" },
+  { home: "Newcastle", away: "Brighton", homeScore: 1, awayScore: 0, date: "Jan 11", competition: "PL" },
+  { home: "Aston Villa", away: "West Ham", homeScore: 2, awayScore: 1, date: "Jan 11", competition: "PL" },
+  { home: "Bournemouth", away: "Crystal Palace", homeScore: 0, awayScore: 3, date: "Jan 10", competition: "PL" },
 ];
-
-function MatchRow({ match }: { match: Match }) {
-  const homeWin = match.homeScore > match.awayScore;
-  const awayWin = match.awayScore > match.homeScore;
-  
-  return (
-    <div className="px-4 py-3 flex items-center hover:bg-muted/40 transition-colors cursor-pointer group">
-      <div className="flex-1 flex items-center gap-2">
-        <div className="flex flex-col items-end flex-1">
-          <span className={`text-sm ${homeWin ? "font-bold" : "font-medium text-muted-foreground"}`}>
-            {match.home}
-          </span>
-        </div>
-        
-        <div className="flex items-center gap-1 px-3 py-1.5 bg-muted rounded-md min-w-[60px] justify-center">
-          <span className={`text-sm font-bold tabular-nums ${homeWin ? "" : "text-muted-foreground"}`}>
-            {match.homeScore}
-          </span>
-          <span className="text-muted-foreground text-xs">-</span>
-          <span className={`text-sm font-bold tabular-nums ${awayWin ? "" : "text-muted-foreground"}`}>
-            {match.awayScore}
-          </span>
-        </div>
-        
-        <div className="flex flex-col items-start flex-1">
-          <span className={`text-sm ${awayWin ? "font-bold" : "font-medium text-muted-foreground"}`}>
-            {match.away}
-          </span>
-        </div>
-      </div>
-      
-      <div className="text-right ml-4">
-        <div className={`text-2xs font-bold ${
-          match.status === "LIVE" ? "text-destructive" : 
-          match.status === "HT" ? "text-primary" : "text-muted-foreground"
-        }`}>
-          {match.status}
-        </div>
-        <div className="text-2xs text-muted-foreground">{match.date}</div>
-      </div>
-    </div>
-  );
-}
 
 export function RecentMatches() {
   return (
-    <div className="bg-card border border-border rounded-lg overflow-hidden shadow-sm">
-      <div className="section-header flex items-center justify-between">
-        <div>
-          <h2 className="section-title">Results</h2>
-          <p className="section-subtitle">Recent matches</p>
-        </div>
-        <button className="text-2xs font-bold text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-          VIEW ALL →
-        </button>
+    <div className="border border-border rounded overflow-hidden">
+      <div className="bg-secondary px-4 py-3 border-b border-border">
+        <h2 className="text-sm font-semibold">Recent Matches</h2>
+        <p className="text-xs text-muted-foreground mt-0.5">Latest results</p>
       </div>
       <div className="divide-y divide-border">
         {matches.map((match, i) => (
-          <MatchRow key={i} match={match} />
+          <div key={i} className="px-4 py-2.5 flex items-center hover:bg-muted/50 transition-colors">
+            <span className="text-2xs text-muted-foreground w-12">{match.date}</span>
+            <div className="flex-1 flex items-center justify-center gap-3">
+              <span className={`text-sm text-right flex-1 ${match.homeScore > match.awayScore ? "font-semibold" : ""}`}>
+                {match.home}
+              </span>
+              <div className="flex items-center gap-1.5 tabular-nums font-semibold text-sm">
+                <span className={match.homeScore > match.awayScore ? "" : "text-muted-foreground"}>
+                  {match.homeScore}
+                </span>
+                <span className="text-muted-foreground">-</span>
+                <span className={match.awayScore > match.homeScore ? "" : "text-muted-foreground"}>
+                  {match.awayScore}
+                </span>
+              </div>
+              <span className={`text-sm text-left flex-1 ${match.awayScore > match.homeScore ? "font-semibold" : ""}`}>
+                {match.away}
+              </span>
+            </div>
+            <span className="text-2xs text-muted-foreground w-8 text-right">{match.competition}</span>
+          </div>
         ))}
       </div>
     </div>
