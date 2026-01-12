@@ -27,39 +27,39 @@ const Index = () => {
           </div>
           
           {/* Sidebar */}
-          <aside className="w-full lg:w-72 space-y-4">
+          <aside className="w-full lg:w-64 space-y-4">
             <LeagueSelector />
             
-            <div className="material-card">
-              <div className="material-card-header">
-                <h2 className="material-card-title">Quick Stats</h2>
+            <div className="carbon-tile">
+              <div className="carbon-tile-header">
+                <h2 className="carbon-tile-title">Quick Stats</h2>
               </div>
-              <div className="p-4 space-y-3 text-sm">
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Matchday</span>
-                  <span className="font-medium">26 of 38</span>
+              <div className="divide-y divide-border">
+                <div className="px-4 py-3 flex justify-between items-center">
+                  <span className="text-muted-foreground text-sm">Matchday</span>
+                  <span className="font-semibold font-mono">26 / 38</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Season</span>
-                  <span className="font-medium">2024-25</span>
+                <div className="px-4 py-3 flex justify-between items-center">
+                  <span className="text-muted-foreground text-sm">Season</span>
+                  <span className="font-semibold font-mono">2024-25</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Teams</span>
-                  <span className="font-medium">20</span>
+                <div className="px-4 py-3 flex justify-between items-center">
+                  <span className="text-muted-foreground text-sm">Teams</span>
+                  <span className="font-semibold font-mono">20</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Avg Goals</span>
-                  <span className="font-medium">2.78</span>
+                <div className="px-4 py-3 flex justify-between items-center">
+                  <span className="text-muted-foreground text-sm">Avg Goals</span>
+                  <span className="font-semibold font-mono">2.78</span>
                 </div>
               </div>
             </div>
             
-            <div className="material-card p-4">
-              <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-2">
+            <div className="carbon-tile p-4">
+              <div className="text-xs text-muted-foreground mb-1">
                 Last Updated
               </div>
-              <div className="text-base font-medium">Jan 12, 2026</div>
-              <div className="text-sm text-muted-foreground">18:45 UTC</div>
+              <div className="text-sm font-semibold font-mono">Jan 12, 2026</div>
+              <div className="text-xs text-muted-foreground mt-1">18:45 UTC</div>
             </div>
           </aside>
         </div>

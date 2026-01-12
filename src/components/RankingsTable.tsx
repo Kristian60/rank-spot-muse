@@ -61,12 +61,12 @@ function FormIndicator({ form }: { form: string[] }) {
       {form.map((result, i) => (
         <span
           key={i}
-          className={`w-5 h-5 flex items-center justify-center text-2xs font-semibold rounded-sm ${
+          className={`w-5 h-5 flex items-center justify-center text-xs font-medium ${
             result === "W"
-              ? "bg-foreground text-background"
+              ? "bg-success text-success-foreground"
               : result === "L"
-              ? "bg-muted text-muted-foreground"
-              : "bg-border text-foreground"
+              ? "bg-destructive text-destructive-foreground"
+              : "bg-muted text-muted-foreground"
           }`}
         >
           {result}
@@ -78,10 +78,13 @@ function FormIndicator({ form }: { form: string[] }) {
 
 export function RankingsTable() {
   return (
-    <div className="material-card">
-      <div className="material-card-header">
-        <h2 className="material-card-title">Premier League Rankings</h2>
-        <p className="material-card-subtitle">2024-25 Season</p>
+    <div className="carbon-tile">
+      <div className="carbon-tile-header flex items-center justify-between">
+        <div>
+          <h2 className="carbon-tile-title">Premier League Rankings</h2>
+          <p className="carbon-tile-subtitle">2024-25 Season</p>
+        </div>
+        <span className="carbon-tag">Live</span>
       </div>
       <div className="overflow-x-auto">
         <table className="data-table">
@@ -104,13 +107,13 @@ export function RankingsTable() {
           <tbody>
             {rankings.map((team) => (
               <tr key={team.rank}>
-                <td className="text-center font-medium">{team.rank}</td>
+                <td className="text-center font-semibold">{team.rank}</td>
                 <td className="text-center">
                   <RankChange change={team.change} />
                 </td>
                 <td>
                   <div className="flex items-center gap-2">
-                    <span className="font-medium">{team.team}</span>
+                    <span className="font-medium text-primary hover:underline cursor-pointer">{team.team}</span>
                     <span className="text-xs text-muted-foreground">{team.country}</span>
                   </div>
                 </td>

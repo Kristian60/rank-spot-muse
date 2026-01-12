@@ -22,19 +22,19 @@ export function Header() {
   }, [isDark]);
 
   return (
-    <header className="container py-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-10">
-          <h1 className="text-xl font-medium tracking-tight text-primary">RANKINGS</h1>
-          <nav className="hidden md:flex items-center gap-1">
+    <header className="border-b-2 border-border bg-card">
+      <div className="container flex items-center h-12">
+        <div className="flex items-center gap-8 flex-1">
+          <h1 className="text-sm font-semibold tracking-tight">RANKINGS</h1>
+          <nav className="hidden md:flex items-center h-full">
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className={`px-4 py-2 text-sm font-medium rounded-sm transition-colors duration-200 ${
+                className={`h-full flex items-center px-4 text-sm transition-colors duration-100 border-b-2 -mb-[2px] ${
                   item.active 
-                    ? "text-primary bg-primary/10" 
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                    ? "text-foreground border-primary font-medium" 
+                    : "text-muted-foreground border-transparent hover:text-foreground hover:bg-field"
                 }`}
               >
                 {item.label}
@@ -42,18 +42,18 @@ export function Header() {
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
               type="search"
               placeholder="Search teams..."
-              className="h-10 w-56 rounded-sm bg-secondary pl-10 pr-4 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+              className="carbon-input w-52 pl-10"
             />
           </div>
           <button
             onClick={() => setIsDark(!isDark)}
-            className="p-2.5 hover:bg-secondary rounded-full transition-colors duration-200"
+            className="h-12 w-12 flex items-center justify-center hover:bg-field transition-colors duration-100"
             aria-label="Toggle dark mode"
           >
             {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
