@@ -1,4 +1,4 @@
-import { Search, Moon, Sun, User, Menu, X } from "lucide-react";
+import { Search, Moon, Sun, User, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Sheet,
@@ -84,7 +84,11 @@ export function Header() {
                   <Menu className="h-5 w-5 text-muted-foreground" />
                 </button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-72">
+              <SheetContent
+                side="right"
+                className="w-72"
+                onOpenAutoFocus={(e) => e.preventDefault()}
+              >
                 <SheetHeader className="text-left">
                   <SheetTitle className="text-lg font-bold">Baserank</SheetTitle>
                 </SheetHeader>
