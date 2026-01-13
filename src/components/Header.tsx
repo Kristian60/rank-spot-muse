@@ -57,17 +57,18 @@ export function Header() {
               />
             </div>
             
-            {/* Desktop-only icons */}
+            {/* Profile - visible on all screens */}
             <button
-              className="hidden md:flex h-9 w-9 items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
+              className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
               aria-label="Profile"
             >
               <User className="h-5 w-5 text-muted-foreground" />
             </button>
             
+            {/* Dark mode toggle - desktop only */}
             <button
               onClick={() => setIsDark(!isDark)}
-              className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
+              className="hidden md:flex h-9 w-9 items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
               aria-label="Toggle dark mode"
             >
               {isDark ? <Sun className="h-5 w-5 text-muted-foreground" /> : <Moon className="h-5 w-5 text-muted-foreground" />}
@@ -88,12 +89,13 @@ export function Header() {
                   <SheetTitle className="text-lg font-bold">Baserank</SheetTitle>
                 </SheetHeader>
                 
-                {/* Mobile Search */}
+                {/* Mobile Search - no autofocus */}
                 <div className="relative mt-6">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <input
                     type="search"
                     placeholder="Search..."
+                    autoFocus={false}
                     className="h-10 w-full pl-9 pr-3 rounded-lg bg-transparent border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
                   />
                 </div>
@@ -112,16 +114,15 @@ export function Header() {
                   ))}
                 </nav>
 
-                {/* Mobile Profile */}
+                {/* Dark mode toggle in sidebar */}
                 <div className="mt-6 pt-6 border-t border-border">
-                  <a
-                    href="#"
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-3 px-3 py-3 text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
+                  <button
+                    onClick={() => setIsDark(!isDark)}
+                    className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
                   >
-                    <User className="h-5 w-5" />
-                    Profile
-                  </a>
+                    {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                    {isDark ? "Light Mode" : "Dark Mode"}
+                  </button>
                 </div>
               </SheetContent>
             </Sheet>
