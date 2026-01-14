@@ -29,9 +29,13 @@ const mockAthlete = {
   nationRank: 1,
   dateOfBirth: "March 21, 1997",
   age: 27,
-  sponsors: "Nike, Reebok, Under Armour",
-  gym: "CrossFit Mayhem",
-  coach: "Rich Froning",
+  sponsors: [
+    { id: "nike", name: "Nike" },
+    { id: "reebok", name: "Reebok" },
+    { id: "under-armour", name: "Under Armour" },
+  ],
+  gym: { id: "crossfit-mayhem", name: "CrossFit Mayhem" },
+  coach: { id: "rich-froning", name: "Rich Froning" },
   achievements: "CrossFit Games Champion 2023, Regional Winner 2022",
 };
 
@@ -223,20 +227,40 @@ const AthleteDetail = () => {
                   Sponsors
                 </span>
                 <span className="text-sm text-foreground">
-                  {athlete.sponsors}
+                  {athlete.sponsors.map((sponsor, idx) => (
+                    <span key={sponsor.id}>
+                      <Link
+                        to={`/sponsor/${sponsor.id}`}
+                        className="hover:text-muted-foreground transition-colors"
+                      >
+                        {sponsor.name}
+                      </Link>
+                      {idx < athlete.sponsors.length - 1 && ", "}
+                    </span>
+                  ))}
                 </span>
               </div>
               <div className="flex justify-between border-b border-border pb-3">
                 <span className="text-sm text-muted-foreground uppercase tracking-wide">
                   Gym
                 </span>
-                <span className="text-sm text-foreground">{athlete.gym}</span>
+                <Link
+                  to={`/gym/${athlete.gym.id}`}
+                  className="text-sm text-foreground hover:text-muted-foreground transition-colors"
+                >
+                  {athlete.gym.name}
+                </Link>
               </div>
               <div className="flex justify-between border-b border-border pb-3">
                 <span className="text-sm text-muted-foreground uppercase tracking-wide">
                   Coach
                 </span>
-                <span className="text-sm text-foreground">{athlete.coach}</span>
+                <Link
+                  to={`/coach/${athlete.coach.id}`}
+                  className="text-sm text-foreground hover:text-muted-foreground transition-colors"
+                >
+                  {athlete.coach.name}
+                </Link>
               </div>
               <div className="flex justify-between">
                 <span className="text-sm text-muted-foreground uppercase tracking-wide">
