@@ -1,4 +1,4 @@
-import { Search, Moon, Sun, User, Menu } from "lucide-react";
+import { Moon, Sun, User, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Sheet,
@@ -7,6 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { SearchDropdown } from "./SearchDropdown";
 
 const navItems = [
   { label: "Rankings", href: "/rankings" },
@@ -49,14 +50,10 @@ export function Header() {
           
           <div className="flex items-center gap-1">
             {/* Search - hidden on mobile */}
-            <div className="relative hidden md:block">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <input
-                type="search"
-                placeholder="Search..."
-                className="h-9 w-44 pl-9 pr-3 rounded-lg bg-transparent border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
-              />
-            </div>
+            <SearchDropdown 
+              className="hidden md:block"
+              inputClassName="h-9 w-56 pl-9 pr-3 rounded-lg bg-transparent border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
+            />
             
             {/* Profile - visible on all screens */}
             <button
@@ -94,14 +91,11 @@ export function Header() {
                   <SheetTitle className="text-lg font-bold">Baserank</SheetTitle>
                 </SheetHeader>
                 
-                {/* Mobile Search - no autofocus */}
-                <div className="relative mt-6">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <input
-                    type="search"
-                    placeholder="Search..."
-                    autoFocus={false}
-                    className="h-10 w-full pl-9 pr-3 rounded-lg bg-transparent border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
+                {/* Mobile Search */}
+                <div className="mt-6">
+                  <SearchDropdown 
+                    onSelect={() => setIsOpen(false)}
+                    inputClassName="h-10 w-full pl-9 pr-3 rounded-lg bg-transparent border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
                   />
                 </div>
 
