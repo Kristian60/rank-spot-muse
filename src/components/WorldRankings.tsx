@@ -72,9 +72,17 @@ function AthleteTable({ athletes, title }: { athletes: Athlete[]; title: string 
 export function WorldRankings() {
   return (
     <div>
-      <div className="mb-10">
-        <h2 className="section-header">World Rankings</h2>
-        <p className="section-subheader">Top 10 athletes globally</p>
+      <div className="mb-10 flex items-end justify-between">
+        <div>
+          <h2 className="section-header">World Rankings</h2>
+          <p className="section-subheader">Top 10 athletes globally</p>
+        </div>
+        <Link
+          to="/rankings"
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          View Top 100 →
+        </Link>
       </div>
       <div className="grid md:grid-cols-2 gap-6">
         <AthleteTable athletes={menAthletes} title="Men" />
