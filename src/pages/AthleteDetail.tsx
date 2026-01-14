@@ -57,6 +57,7 @@ const competitions = [
     season: "2024",
     events: [
       {
+        id: "rogue-2024",
         name: "Rogue Invitational 2024",
         date: "November 08, 2024",
         place: 2,
@@ -65,6 +66,7 @@ const competitions = [
         type: "Ind",
       },
       {
+        id: "games-2024",
         name: "2024 CrossFit Games",
         date: "August 05, 2024",
         place: "DNF",
@@ -73,6 +75,7 @@ const competitions = [
         type: "Ind",
       },
       {
+        id: "quarters-europe-2024",
         name: "2024 CrossFit Quarterfinals: Europe",
         date: "May 19, 2024",
         place: 2,
@@ -81,6 +84,7 @@ const competitions = [
         type: "Ind",
       },
       {
+        id: "semis-europe-2024",
         name: "CrossFit Semifinals 2024: Europe",
         date: "January 01, 2024",
         place: 1,
@@ -94,6 +98,7 @@ const competitions = [
     season: "2023",
     events: [
       {
+        id: "games-2023",
         name: "2023 CrossFit Games",
         date: "August 05, 2023",
         place: 1,
@@ -102,6 +107,7 @@ const competitions = [
         type: "Ind",
       },
       {
+        id: "semis-europe-2023",
         name: "CrossFit Semifinals 2023: NOBULL Europe",
         date: "June 04, 2023",
         place: 3,
@@ -110,6 +116,7 @@ const competitions = [
         type: "Ind",
       },
       {
+        id: "quarters-2023",
         name: "CrossFit Individual Quarterfinals 2023",
         date: "April 02, 2023",
         place: 2,
@@ -123,6 +130,7 @@ const competitions = [
     season: "2022",
     events: [
       {
+        id: "games-2022",
         name: "2022 CrossFit Games",
         date: "August 04, 2022",
         place: 2,
@@ -131,6 +139,7 @@ const competitions = [
         type: "Ind",
       },
       {
+        id: "semis-europe-2022",
         name: "CrossFit Semifinals 2022: Europe",
         date: "June 10, 2022",
         place: 1,
@@ -324,9 +333,12 @@ const AthleteDetail = () => {
                       <TableRow key={`${season.season}-${idx}`}>
                         <TableCell>
                           <div>
-                            <div className="font-medium text-foreground">
+                            <Link
+                              to={`/competition/${event.id}`}
+                              className="font-medium text-foreground hover:text-muted-foreground transition-colors"
+                            >
                               {event.name}
-                            </div>
+                            </Link>
                             <div className="text-xs text-muted-foreground">
                               {event.date}
                             </div>
