@@ -1,7 +1,8 @@
 import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, Users } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Users, Trophy, Medal, Clock } from "lucide-react";
 import { Header } from "@/components/Header";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Table,
   TableBody,
@@ -203,25 +204,47 @@ const CompetitionDetail = () => {
         </div>
 
         {/* Division Selector */}
-        <div className="mb-6">
-          <h2 className="text-sm font-semibold text-foreground uppercase tracking-wide mb-4">
-            Select Division
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {competition.divisions.map((division) => (
-              <button
-                key={division}
-                onClick={() => handleDivisionChange(division)}
-                className={`px-4 py-2 text-sm rounded-lg border transition-colors ${
-                  selectedDivision === division
-                    ? "bg-foreground text-background border-foreground"
-                    : "bg-background text-foreground border-border hover:border-foreground"
-                }`}
-              >
-                {division}
-              </button>
-            ))}
-          </div>
+        <div className="mb-8">
+          <Tabs value={selectedDivision} onValueChange={handleDivisionChange}>
+            {/* Elite */}
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <Trophy className="h-4 w-4 text-foreground" />
+                <span className="text-sm font-semibold text-foreground uppercase tracking-wide">Elite</span>
+                <span className="text-xs text-muted-foreground">— Unrestricted</span>
+              </div>
+              <TabsList className="h-auto p-1 bg-muted/50 inline-flex gap-1">
+                <TabsTrigger value="Elite Men" className="px-4 py-2 text-sm">Men</TabsTrigger>
+                <TabsTrigger value="Elite Women" className="px-4 py-2 text-sm">Women</TabsTrigger>
+              </TabsList>
+            </div>
+
+            {/* Intermediate */}
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <Medal className="h-4 w-4 text-foreground" />
+                <span className="text-sm font-semibold text-foreground uppercase tracking-wide">Intermediate</span>
+                <span className="text-xs text-muted-foreground">— Second tier</span>
+              </div>
+              <TabsList className="h-auto p-1 bg-muted/50 inline-flex gap-1">
+                <TabsTrigger value="Intermediate Men" className="px-4 py-2 text-sm">Men</TabsTrigger>
+                <TabsTrigger value="Intermediate Women" className="px-4 py-2 text-sm">Women</TabsTrigger>
+              </TabsList>
+            </div>
+
+            {/* Masters */}
+            <div className="mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <Clock className="h-4 w-4 text-foreground" />
+                <span className="text-sm font-semibold text-foreground uppercase tracking-wide">Masters</span>
+                <span className="text-xs text-muted-foreground">— Age-restricted divisions</span>
+              </div>
+              <TabsList className="h-auto p-1 bg-muted/50 inline-flex gap-1">
+                <TabsTrigger value="Masters 35-39" className="px-4 py-2 text-sm">35-39</TabsTrigger>
+                <TabsTrigger value="Masters 40-44" className="px-4 py-2 text-sm">40-44</TabsTrigger>
+              </TabsList>
+            </div>
+          </Tabs>
         </div>
 
         {/* Leaderboard */}
