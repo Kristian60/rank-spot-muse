@@ -55,7 +55,7 @@ const rankingHistory = [
   { year: "2024 Q4", rating: 283 },
 ];
 
-// Mock competition history
+// Mock competition history with skill modeling (mu and sigma)
 const competitions = [
   {
     season: "2024",
@@ -68,6 +68,8 @@ const competitions = [
         location: "Aberdeen, United Kingdom",
         flag: "🇬🇧",
         type: "Ind",
+        prior: { mu: 2045, sigma: 38 },
+        posterior: { mu: 2052, sigma: 35 },
       },
       {
         id: "games-2024",
@@ -77,6 +79,8 @@ const competitions = [
         location: "Fort Worth, TX, USA",
         flag: "🇺🇸",
         type: "Ind",
+        prior: { mu: 2068, sigma: 42 },
+        posterior: { mu: 2045, sigma: 38 },
       },
       {
         id: "quarters-europe-2024",
@@ -86,6 +90,8 @@ const competitions = [
         location: "Online",
         flag: "🌐",
         type: "Ind",
+        prior: { mu: 2055, sigma: 45 },
+        posterior: { mu: 2068, sigma: 42 },
       },
       {
         id: "semis-europe-2024",
@@ -94,7 +100,9 @@ const competitions = [
         place: 1,
         location: "Décines-Charpieu, France",
         flag: "🇫🇷",
-        type: "Ind",
+        type: "Team",
+        prior: { mu: 2032, sigma: 48 },
+        posterior: { mu: 2055, sigma: 45 },
       },
     ],
   },
@@ -109,6 +117,8 @@ const competitions = [
         location: "Madison, WI, USA",
         flag: "🇺🇸",
         type: "Ind",
+        prior: { mu: 1985, sigma: 52 },
+        posterior: { mu: 2032, sigma: 48 },
       },
       {
         id: "semis-europe-2023",
@@ -118,6 +128,8 @@ const competitions = [
         location: "Berlin, Germany",
         flag: "🇩🇪",
         type: "Ind",
+        prior: { mu: 1972, sigma: 55 },
+        posterior: { mu: 1985, sigma: 52 },
       },
       {
         id: "quarters-2023",
@@ -126,7 +138,9 @@ const competitions = [
         place: 2,
         location: "Online",
         flag: "🌐",
-        type: "Ind",
+        type: "Team",
+        prior: { mu: 1958, sigma: 58 },
+        posterior: { mu: 1972, sigma: 55 },
       },
     ],
   },
@@ -141,6 +155,8 @@ const competitions = [
         location: "Madison, WI, USA",
         flag: "🇺🇸",
         type: "Ind",
+        prior: { mu: 1920, sigma: 62 },
+        posterior: { mu: 1958, sigma: 58 },
       },
       {
         id: "semis-europe-2022",
@@ -150,6 +166,8 @@ const competitions = [
         location: "Madrid, Spain",
         flag: "🇪🇸",
         type: "Ind",
+        prior: { mu: 1895, sigma: 68 },
+        posterior: { mu: 1920, sigma: 62 },
       },
     ],
   },
@@ -327,13 +345,21 @@ const AthleteDetail = () => {
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/30">
-                  <TableHead className="font-medium">Competition</TableHead>
-                  <TableHead className="font-medium text-center w-20">
+                  <TableHead className="font-medium text-center w-16">
                     Place
                   </TableHead>
                   <TableHead className="font-medium">Location</TableHead>
-                  <TableHead className="font-medium text-center w-20">
+                  <TableHead className="font-medium text-center w-16">
                     Type
+                  </TableHead>
+                  <TableHead className="font-medium text-center w-24">
+                    Prior
+                  </TableHead>
+                  <TableHead className="font-medium text-center w-24">
+                    Posterior
+                  </TableHead>
+                  <TableHead className="font-medium text-center w-20">
+                    Delta
                   </TableHead>
                 </TableRow>
               </TableHeader>
@@ -346,54 +372,84 @@ const AthleteDetail = () => {
                       className="bg-muted/50"
                     >
                       <TableCell
-                        colSpan={4}
+                        colSpan={6}
                         className="font-semibold text-sm py-2"
                       >
                         {season.season} Season
                       </TableCell>
                     </TableRow>
                     {/* Events */}
-                    {season.events.map((event, idx) => (
-                      <TableRow key={`${season.season}-${idx}`}>
-                        <TableCell>
-                          <div>
-                            <Link
-                              to={`/competition/${event.id}`}
-                              className="font-medium text-foreground hover:text-muted-foreground transition-colors"
+                    {season.events.map((event, idx) => {
+                      const delta = event.posterior.mu - event.prior.mu;
+                      return (
+                        <TableRow key={`${season.season}-${idx}`}>
+                          <TableCell className="text-center">
+                            <span
+                              className={
+                                event.place === 1
+                                  ? "font-bold text-foreground"
+                                  : event.place === "DNF"
+                                  ? "text-destructive"
+                                  : "text-foreground"
+                              }
                             >
-                              {event.name}
-                            </Link>
-                            <div className="text-xs text-muted-foreground">
-                              {event.date}
+                              {event.place}
+                            </span>
+                          </TableCell>
+                          <TableCell>
+                            <div>
+                              <Link
+                                to={`/competition/${event.id}`}
+                                className="font-medium text-foreground hover:text-muted-foreground transition-colors"
+                              >
+                                {event.name}
+                              </Link>
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground mt-0.5">
+                                <span>{event.flag}</span>
+                                <span>{event.location}</span>
+                                <span>•</span>
+                                <span>{event.date}</span>
+                              </div>
                             </div>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-center">
-                          <span
-                            className={
-                              event.place === 1
-                                ? "font-bold text-foreground"
-                                : event.place === "DNF"
-                                ? "text-destructive"
-                                : "text-foreground"
-                            }
-                          >
-                            {event.place}
-                          </span>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            <span>{event.flag}</span>
-                            <span className="text-sm">{event.location}</span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-center">
-                          <span className="text-xs text-muted-foreground border border-border rounded px-2 py-0.5">
-                            {event.type}
-                          </span>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                          </TableCell>
+                          <TableCell className="text-center">
+                            <span className="text-xs text-muted-foreground border border-border rounded px-2 py-0.5">
+                              {event.type}
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-center">
+                            <span className="text-sm text-foreground">
+                              {event.prior.mu}
+                            </span>
+                            <span className="text-xs text-muted-foreground ml-1">
+                              ({event.prior.sigma})
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-center">
+                            <span className="text-sm text-foreground">
+                              {event.posterior.mu}
+                            </span>
+                            <span className="text-xs text-muted-foreground ml-1">
+                              ({event.posterior.sigma})
+                            </span>
+                          </TableCell>
+                          <TableCell className="text-center">
+                            <span
+                              className={`text-sm font-medium ${
+                                delta > 0
+                                  ? "text-green-600"
+                                  : delta < 0
+                                  ? "text-destructive"
+                                  : "text-muted-foreground"
+                              }`}
+                            >
+                              {delta > 0 ? "+" : ""}
+                              {delta}
+                            </span>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </>
                 ))}
               </TableBody>
