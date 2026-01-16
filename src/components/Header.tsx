@@ -1,4 +1,4 @@
-import { Moon, Sun, User, Menu } from "lucide-react";
+import { Moon, Sun, User, Menu, Shield, LogIn, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Sheet,
@@ -8,6 +8,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { SearchDropdown } from "./SearchDropdown";
+import { useAdmin } from "@/contexts/AdminContext";
+import { Switch } from "@/components/ui/switch";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const navItems = [
   { label: "Rankings", href: "/rankings" },
@@ -19,6 +26,7 @@ const navItems = [
 export function Header() {
   const [isDark, setIsDark] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { isAdmin, isAdminMode, toggleAdminMode, login, logout } = useAdmin();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -55,13 +63,44 @@ export function Header() {
               inputClassName="h-9 w-56 pl-9 pr-3 rounded-lg bg-transparent border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
             />
             
-            {/* Profile - visible on all screens */}
-            <button
-              className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
-              aria-label="Profile"
-            >
-              <User className="h-5 w-5 text-muted-foreground" />
-            </button>
+            {/* Admin Toggle - only visible when logged in as admin */}
+            {isAdmin && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="hidden md:flex items-center gap-2 px-2 py-1 rounded-lg border border-border">
+                    <Shield className={`h-4 w-4 ${isAdminMode ? "text-primary" : "text-muted-foreground"}`} />
+                    <Switch
+                      checked={isAdminMode}
+                      onCheckedChange={toggleAdminMode}
+                      className="data-[state=checked]:bg-primary"
+                    />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Admin Edit Mode</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
+
+            {/* Login/Logout - visible on all screens */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={isAdmin ? logout : login}
+                  className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
+                  aria-label={isAdmin ? "Logout" : "Login as Admin"}
+                >
+                  {isAdmin ? (
+                    <LogOut className="h-5 w-5 text-muted-foreground" />
+                  ) : (
+                    <LogIn className="h-5 w-5 text-muted-foreground" />
+                  )}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{isAdmin ? "Logout" : "Login as Admin"}</p>
+              </TooltipContent>
+            </Tooltip>
             
             {/* Dark mode toggle - desktop only */}
             <button
@@ -113,8 +152,28 @@ export function Header() {
                   ))}
                 </nav>
 
-                {/* Dark mode toggle in sidebar */}
-                <div className="mt-6 pt-6 border-t border-border">
+                {/* Admin toggle and Dark mode in sidebar */}
+                <div className="mt-6 pt-6 border-t border-border space-y-1">
+                  {isAdmin && (
+                    <div className="flex items-center justify-between px-3 py-3 rounded-lg">
+                      <div className="flex items-center gap-3 text-base text-muted-foreground">
+                        <Shield className={`h-5 w-5 ${isAdminMode ? "text-primary" : ""}`} />
+                        Admin Mode
+                      </div>
+                      <Switch
+                        checked={isAdminMode}
+                        onCheckedChange={toggleAdminMode}
+                        className="data-[state=checked]:bg-primary"
+                      />
+                    </div>
+                  )}
+                  <button
+                    onClick={isAdmin ? logout : login}
+                    className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
+                  >
+                    {isAdmin ? <LogOut className="h-5 w-5" /> : <LogIn className="h-5 w-5" />}
+                    {isAdmin ? "Logout" : "Login as Admin"}
+                  </button>
                   <button
                     onClick={() => setIsDark(!isDark)}
                     className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"

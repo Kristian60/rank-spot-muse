@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/Header";
+import { EditableText } from "@/components/EditableText";
 import {
   Table,
   TableBody,
@@ -175,7 +177,15 @@ const competitions = [
 
 const AthleteDetail = () => {
   const { id } = useParams();
-  const athlete = mockAthlete; // In real app, fetch by id
+  const [athlete, setAthlete] = useState(mockAthlete);
+
+  const updateAthleteName = (newName: string) => {
+    setAthlete((prev) => ({ ...prev, name: newName }));
+  };
+
+  const updateAthleteField = (field: string, value: string) => {
+    setAthlete((prev) => ({ ...prev, [field]: value }));
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -194,9 +204,12 @@ const AthleteDetail = () => {
         {/* Athlete Header */}
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-10">
           <div>
-            <h1 className="text-3xl font-bold text-foreground mb-2">
-              {athlete.name}
-            </h1>
+            <EditableText
+              value={athlete.name}
+              onSave={updateAthleteName}
+              as="h1"
+              className="text-3xl font-bold text-foreground mb-2"
+            />
             <div className="flex items-center gap-2 text-muted-foreground">
               <span className="text-xl">{athlete.flag}</span>
               <span>{athlete.country}</span>
@@ -236,9 +249,11 @@ const AthleteDetail = () => {
                 <span className="text-sm text-muted-foreground uppercase tracking-wide">
                   Date of Birth
                 </span>
-                <span className="text-sm text-foreground">
-                  {athlete.dateOfBirth}
-                </span>
+                <EditableText
+                  value={athlete.dateOfBirth}
+                  onSave={(val) => updateAthleteField("dateOfBirth", val)}
+                  className="text-sm text-foreground"
+                />
               </div>
               <div className="flex justify-between border-b border-border pb-3">
                 <span className="text-sm text-muted-foreground uppercase tracking-wide">
@@ -284,9 +299,11 @@ const AthleteDetail = () => {
                 <span className="text-sm text-muted-foreground uppercase tracking-wide">
                   Achievements
                 </span>
-                <span className="text-sm text-foreground text-right max-w-[200px]">
-                  {athlete.achievements}
-                </span>
+                <EditableText
+                  value={athlete.achievements}
+                  onSave={(val) => updateAthleteField("achievements", val)}
+                  className="text-sm text-foreground text-right max-w-[200px]"
+                />
               </div>
             </div>
           </div>

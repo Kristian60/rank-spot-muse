@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Calendar, Users, Trophy, Medal, Clock } from "lucide-react";
 import { Header } from "@/components/Header";
+import { EditableText } from "@/components/EditableText";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Table,
@@ -106,10 +107,14 @@ const ITEMS_PER_PAGE = 10;
 
 const CompetitionDetail = () => {
   const { id } = useParams();
+  const [competition, setCompetition] = useState(mockCompetition);
   const [selectedDivision, setSelectedDivision] = useState("Elite Women");
   const [currentPage, setCurrentPage] = useState(1);
-  const competition = mockCompetition;
   const leaderboard = leaderboards[selectedDivision] || [];
+
+  const updateCompetitionField = (field: string, value: string) => {
+    setCompetition((prev) => ({ ...prev, [field]: value }));
+  };
 
   // Sort athletes: ranked first (by rank), DNF at bottom
   const sortedLeaderboard = useMemo(() => {
@@ -147,9 +152,12 @@ const CompetitionDetail = () => {
 
         {/* Competition Header */}
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-foreground mb-3">
-            {competition.name}
-          </h1>
+          <EditableText
+            value={competition.name}
+            onSave={(val) => updateCompetitionField("name", val)}
+            as="h1"
+            className="text-3xl font-bold text-foreground mb-3"
+          />
           <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
@@ -173,17 +181,21 @@ const CompetitionDetail = () => {
             <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
               Venue
             </div>
-            <div className="text-sm font-medium text-foreground">
-              {competition.venue}
-            </div>
+            <EditableText
+              value={competition.venue}
+              onSave={(val) => updateCompetitionField("venue", val)}
+              className="text-sm font-medium text-foreground"
+            />
           </div>
           <div className="border border-border rounded-lg p-4">
             <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
               Prize Purse
             </div>
-            <div className="text-sm font-medium text-foreground">
-              {competition.prizePurse}
-            </div>
+            <EditableText
+              value={competition.prizePurse}
+              onSave={(val) => updateCompetitionField("prizePurse", val)}
+              className="text-sm font-medium text-foreground"
+            />
           </div>
           <div className="border border-border rounded-lg p-4">
             <div className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
