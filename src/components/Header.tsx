@@ -1,4 +1,5 @@
-import { Moon, Sun, User, Menu, Shield, LogIn, LogOut } from "lucide-react";
+import { Moon, Sun, User, Menu, Shield, LogIn, LogOut, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   Sheet,
@@ -63,23 +64,38 @@ export function Header() {
               inputClassName="h-9 w-56 pl-9 pr-3 rounded-lg bg-transparent border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
             />
             
-            {/* Admin Toggle - only visible when logged in as admin */}
+            {/* Admin Controls - only visible when logged in as admin */}
             {isAdmin && (
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="hidden md:flex items-center gap-2 px-2 py-1 rounded-lg border border-border">
-                    <Shield className={`h-4 w-4 ${isAdminMode ? "text-primary" : "text-muted-foreground"}`} />
-                    <Switch
-                      checked={isAdminMode}
-                      onCheckedChange={toggleAdminMode}
-                      className="data-[state=checked]:bg-primary"
-                    />
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Admin Edit Mode</p>
-                </TooltipContent>
-              </Tooltip>
+              <>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link
+                      to="/admin"
+                      className="hidden md:flex h-9 w-9 items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
+                    >
+                      <Settings className="h-5 w-5 text-muted-foreground" />
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Admin Dashboard</p>
+                  </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="hidden md:flex items-center gap-2 px-2 py-1 rounded-lg border border-border">
+                      <Shield className={`h-4 w-4 ${isAdminMode ? "text-primary" : "text-muted-foreground"}`} />
+                      <Switch
+                        checked={isAdminMode}
+                        onCheckedChange={toggleAdminMode}
+                        className="data-[state=checked]:bg-primary"
+                      />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Admin Edit Mode</p>
+                  </TooltipContent>
+                </Tooltip>
+              </>
             )}
 
             {/* Login/Logout - visible on all screens */}
@@ -155,17 +171,27 @@ export function Header() {
                 {/* Admin toggle and Dark mode in sidebar */}
                 <div className="mt-6 pt-6 border-t border-border space-y-1">
                   {isAdmin && (
-                    <div className="flex items-center justify-between px-3 py-3 rounded-lg">
-                      <div className="flex items-center gap-3 text-base text-muted-foreground">
-                        <Shield className={`h-5 w-5 ${isAdminMode ? "text-primary" : ""}`} />
-                        Admin Mode
+                    <>
+                      <Link
+                        to="/admin"
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
+                      >
+                        <Settings className="h-5 w-5" />
+                        Admin Dashboard
+                      </Link>
+                      <div className="flex items-center justify-between px-3 py-3 rounded-lg">
+                        <div className="flex items-center gap-3 text-base text-muted-foreground">
+                          <Shield className={`h-5 w-5 ${isAdminMode ? "text-primary" : ""}`} />
+                          Admin Mode
+                        </div>
+                        <Switch
+                          checked={isAdminMode}
+                          onCheckedChange={toggleAdminMode}
+                          className="data-[state=checked]:bg-primary"
+                        />
                       </div>
-                      <Switch
-                        checked={isAdminMode}
-                        onCheckedChange={toggleAdminMode}
-                        className="data-[state=checked]:bg-primary"
-                      />
-                    </div>
+                    </>
                   )}
                   <button
                     onClick={isAdmin ? logout : login}
