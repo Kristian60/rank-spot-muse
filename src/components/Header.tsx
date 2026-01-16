@@ -39,8 +39,10 @@ export function Header() {
   const [isDark, setIsDark] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { isAdmin, isAdminMode, toggleAdminMode, login, logout } = useAdmin();
 
   useEffect(() => {
@@ -52,14 +54,24 @@ export function Header() {
     }
   }, [isDark]);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock login - in real app this would check credentials
-    // For demo: admin@baserank.com logs in as admin, others as regular user
+    if (isSignUp && password !== confirmPassword) {
+      return; // In real app, show error
+    }
+    // Mock login/signup - in real app this would check credentials or create account
     login();
     setLoginOpen(false);
     setEmail("");
     setPassword("");
+    setConfirmPassword("");
+    setIsSignUp(false);
+  };
+
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (
@@ -135,18 +147,20 @@ export function Header() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle>Sign in</DialogTitle>
+                    <DialogTitle>{isSignUp ? "Create account" : "Sign in"}</DialogTitle>
                     <DialogDescription>
-                      Enter your credentials to access your account
+                      {isSignUp 
+                        ? "Enter your details to create a new account" 
+                        : "Enter your credentials to access your account"}
                     </DialogDescription>
                   </DialogHeader>
-                  <form onSubmit={handleLogin} className="space-y-4 pt-4">
+                  <form onSubmit={handleSubmit} className="space-y-4 pt-4">
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
                       <Input
                         id="email"
                         type="email"
-                        placeholder="admin@baserank.com"
+                        placeholder="you@example.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -163,9 +177,47 @@ export function Header() {
                         required
                       />
                     </div>
+                    {isSignUp && (
+                      <div className="space-y-2">
+                        <Label htmlFor="confirmPassword">Confirm Password</Label>
+                        <Input
+                          id="confirmPassword"
+                          type="password"
+                          placeholder="••••••••"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
                     <Button type="submit" className="w-full">
-                      Sign in
+                      {isSignUp ? "Create account" : "Sign in"}
                     </Button>
+                    <div className="text-center text-sm text-muted-foreground">
+                      {isSignUp ? (
+                        <>
+                          Already have an account?{" "}
+                          <button
+                            type="button"
+                            onClick={() => { setIsSignUp(false); resetForm(); }}
+                            className="text-primary hover:underline"
+                          >
+                            Sign in
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          Don't have an account?{" "}
+                          <button
+                            type="button"
+                            onClick={() => { setIsSignUp(true); resetForm(); }}
+                            className="text-primary hover:underline"
+                          >
+                            Sign up
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </form>
                 </DialogContent>
               </Dialog>
