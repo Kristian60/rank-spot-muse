@@ -11,6 +11,7 @@ import Rankings from "./pages/Rankings";
 import SponsorDetail from "./pages/SponsorDetail";
 import GymDetail from "./pages/GymDetail";
 import CoachDetail from "./pages/CoachDetail";
+import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/sponsor/:id" element={<SponsorDetail />} />
           <Route path="/gym/:id" element={<GymDetail />} />
           <Route path="/coach/:id" element={<CoachDetail />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
