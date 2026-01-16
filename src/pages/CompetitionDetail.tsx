@@ -157,6 +157,10 @@ const CompetitionDetail = () => {
             onSave={(val) => updateCompetitionField("name", val)}
             as="h1"
             className="text-3xl font-bold text-foreground mb-3"
+            entityType="competition"
+            entityId={competition.id}
+            entityName={competition.name}
+            fieldName="name"
           />
           <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
             <div className="flex items-center gap-2">
@@ -185,6 +189,10 @@ const CompetitionDetail = () => {
               value={competition.venue}
               onSave={(val) => updateCompetitionField("venue", val)}
               className="text-sm font-medium text-foreground"
+              entityType="competition"
+              entityId={competition.id}
+              entityName={competition.name}
+              fieldName="venue"
             />
           </div>
           <div className="border border-border rounded-lg p-4">
@@ -195,6 +203,10 @@ const CompetitionDetail = () => {
               value={competition.prizePurse}
               onSave={(val) => updateCompetitionField("prizePurse", val)}
               className="text-sm font-medium text-foreground"
+              entityType="competition"
+              entityId={competition.id}
+              entityName={competition.name}
+              fieldName="prize purse"
             />
           </div>
           <div className="border border-border rounded-lg p-4">
