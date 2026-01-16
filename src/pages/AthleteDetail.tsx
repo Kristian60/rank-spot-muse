@@ -209,6 +209,10 @@ const AthleteDetail = () => {
               onSave={updateAthleteName}
               as="h1"
               className="text-3xl font-bold text-foreground mb-2"
+              entityType="athlete"
+              entityId={athlete.id}
+              entityName={athlete.name}
+              fieldName="name"
             />
             <div className="flex items-center gap-2 text-muted-foreground">
               <span className="text-xl">{athlete.flag}</span>
@@ -253,6 +257,10 @@ const AthleteDetail = () => {
                   value={athlete.dateOfBirth}
                   onSave={(val) => updateAthleteField("dateOfBirth", val)}
                   className="text-sm text-foreground"
+                  entityType="athlete"
+                  entityId={athlete.id}
+                  entityName={athlete.name}
+                  fieldName="date of birth"
                 />
               </div>
               <div className="flex justify-between border-b border-border pb-3">
@@ -303,6 +311,10 @@ const AthleteDetail = () => {
                   value={athlete.achievements}
                   onSave={(val) => updateAthleteField("achievements", val)}
                   className="text-sm text-foreground text-right max-w-[200px]"
+                  entityType="athlete"
+                  entityId={athlete.id}
+                  entityName={athlete.name}
+                  fieldName="achievements"
                 />
               </div>
             </div>

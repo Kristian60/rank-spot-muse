@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Pencil, Check, X } from "lucide-react";
 import { useAdmin } from "@/contexts/AdminContext";
+import { useActivityLog } from "@/contexts/ActivityLogContext";
 import { cn } from "@/lib/utils";
 
 interface EditableTextProps {
@@ -9,6 +10,10 @@ interface EditableTextProps {
   className?: string;
   inputClassName?: string;
   as?: "span" | "h1" | "h2" | "h3" | "p" | "div";
+  entityType?: string;
+  entityId?: string;
+  entityName?: string;
+  fieldName?: string;
 }
 
 export function EditableText({
@@ -17,8 +22,13 @@ export function EditableText({
   className = "",
   inputClassName = "",
   as: Component = "span",
+  entityType = "item",
+  entityId = "unknown",
+  entityName,
+  fieldName,
 }: EditableTextProps) {
   const { isAdminMode } = useAdmin();
+  const { addLog } = useActivityLog();
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(value);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -31,7 +41,19 @@ export function EditableText({
   }, [isEditing]);
 
   const handleSave = () => {
-    onSave?.(editValue);
+    if (editValue !== value) {
+      // Log the change
+      addLog({
+        action: "edit",
+        entityType,
+        entityId,
+        entityName: entityName || value,
+        field: fieldName,
+        oldValue: value,
+        newValue: editValue,
+      });
+      onSave?.(editValue);
+    }
     setIsEditing(false);
   };
 

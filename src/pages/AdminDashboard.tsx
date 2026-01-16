@@ -14,17 +14,28 @@ import {
   RefreshCw,
   AlertTriangle,
   ChevronRight,
-  ExternalLink
+  ExternalLink,
+  History,
+  RotateCcw,
+  User,
+  FileText
 } from "lucide-react";
 import { Header } from "@/components/Header";
 import { useAdmin } from "@/contexts/AdminContext";
+import { useActivityLog, ActivityLogEntry } from "@/contexts/ActivityLogContext";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { formatDistanceToNow } from "date-fns";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-type SettingsSection = "general" | "athletes" | "competitions" | "access" | "notifications" | "danger";
+type SettingsSection = "general" | "athletes" | "competitions" | "access" | "notifications" | "activity" | "danger";
 
 interface SettingToggle {
   id: string;
@@ -44,6 +55,7 @@ interface ActionItem {
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { isAdmin } = useAdmin();
+  const { logs, revertLog } = useActivityLog();
   const [activeSection, setActiveSection] = useState<SettingsSection>("general");
 
   // Mock toggle states
@@ -87,6 +99,7 @@ export default function AdminDashboard() {
     { id: "competitions" as const, label: "Competitions", icon: Trophy },
     { id: "access" as const, label: "Access & Security", icon: Shield },
     { id: "notifications" as const, label: "Notifications", icon: Bell },
+    { id: "activity" as const, label: "Activity Log", icon: History },
     { id: "danger" as const, label: "Danger Zone", icon: AlertTriangle, danger: true },
   ];
 
@@ -273,6 +286,24 @@ export default function AdminDashboard() {
                 onCheckedChange={() => handleToggle("slackNotifications")}
               />
             </ToggleGroup>
+          </SettingsPanel>
+        );
+
+      case "activity":
+        return (
+          <SettingsPanel title="Activity Log" description="View all admin changes and revert if needed.">
+            <div className="space-y-3">
+              {logs.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  <History className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                  <p>No activity recorded yet.</p>
+                </div>
+              ) : (
+                logs.map((log) => (
+                  <ActivityLogItem key={log.id} log={log} onRevert={revertLog} />
+                ))
+              )}
+            </div>
           </SettingsPanel>
         );
 
@@ -480,6 +511,94 @@ function DangerAction({
       <Button variant="destructive" size="sm">
         {buttonText}
       </Button>
+    </div>
+  );
+}
+
+function ActivityLogItem({ 
+  log, 
+  onRevert 
+}: { 
+  log: ActivityLogEntry; 
+  onRevert: (id: string) => void;
+}) {
+  const getActionColor = (action: string) => {
+    switch (action) {
+      case "edit": return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
+      case "create": return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400";
+      case "delete": return "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400";
+      default: return "bg-secondary text-secondary-foreground";
+    }
+  };
+
+  const getEntityIcon = (type: string) => {
+    switch (type) {
+      case "athlete": return User;
+      case "competition": return Trophy;
+      default: return FileText;
+    }
+  };
+
+  const EntityIcon = getEntityIcon(log.entityType);
+
+  return (
+    <div className={cn(
+      "flex items-start gap-4 p-4 rounded-lg border transition-colors",
+      log.reverted 
+        ? "border-border bg-muted/30 opacity-60" 
+        : "border-border hover:bg-secondary/30"
+    )}>
+      <div className="p-2 rounded-md bg-secondary">
+        <EntityIcon className="h-4 w-4 text-muted-foreground" />
+      </div>
+      
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <Badge className={cn("text-xs font-normal", getActionColor(log.action))}>
+            {log.action}
+          </Badge>
+          <span className="text-sm font-medium">{log.entityName}</span>
+          {log.field && (
+            <span className="text-xs text-muted-foreground">• {log.field}</span>
+          )}
+          {log.reverted && (
+            <Badge variant="outline" className="text-xs">Reverted</Badge>
+          )}
+        </div>
+        
+        <div className="flex items-center gap-2 text-sm mb-2">
+          <span className="text-muted-foreground line-through">{log.oldValue}</span>
+          <ChevronRight className="h-3 w-3 text-muted-foreground" />
+          <span className="text-foreground">{log.newValue}</span>
+        </div>
+        
+        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1">
+            <User className="h-3 w-3" />
+            {log.user}
+          </span>
+          <span>•</span>
+          <span>{formatDistanceToNow(log.timestamp, { addSuffix: true })}</span>
+        </div>
+      </div>
+
+      {!log.reverted && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="h-8 w-8 p-0"
+              onClick={() => onRevert(log.id)}
+            >
+              <RotateCcw className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Revert this change</p>
+          </TooltipContent>
+        </Tooltip>
+      )}
     </div>
   );
 }
