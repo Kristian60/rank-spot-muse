@@ -1,4 +1,4 @@
-import { Moon, Sun, User, Menu, Shield, LogIn, LogOut, Settings } from "lucide-react";
+import { Moon, Sun, User, Menu, Shield, LogOut, Settings, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
@@ -16,6 +16,14 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { label: "Rankings", href: "/rankings" },
@@ -64,59 +72,79 @@ export function Header() {
               inputClassName="h-9 w-56 pl-9 pr-3 rounded-lg bg-transparent border border-border text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-150"
             />
             
-            {/* Admin Controls - only visible when logged in as admin */}
+            {/* Admin Edit Mode Toggle - only visible when logged in as admin */}
             {isAdmin && (
-              <>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      to="/admin"
-                      className="hidden md:flex h-9 w-9 items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
-                    >
-                      <Settings className="h-5 w-5 text-muted-foreground" />
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Admin Dashboard</p>
-                  </TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div className="hidden md:flex items-center gap-2 px-2 py-1 rounded-lg border border-border">
-                      <Shield className={`h-4 w-4 ${isAdminMode ? "text-primary" : "text-muted-foreground"}`} />
-                      <Switch
-                        checked={isAdminMode}
-                        onCheckedChange={toggleAdminMode}
-                        className="data-[state=checked]:bg-primary"
-                      />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Admin Edit Mode</p>
-                  </TooltipContent>
-                </Tooltip>
-              </>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="hidden md:flex items-center gap-2 px-2 py-1 rounded-lg border border-border">
+                    <Shield className={`h-4 w-4 ${isAdminMode ? "text-primary" : "text-muted-foreground"}`} />
+                    <Switch
+                      checked={isAdminMode}
+                      onCheckedChange={toggleAdminMode}
+                      className="data-[state=checked]:bg-primary"
+                    />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Admin Edit Mode</p>
+                </TooltipContent>
+              </Tooltip>
             )}
 
-            {/* Login/Logout - visible on all screens */}
-            <Tooltip>
-              <TooltipTrigger asChild>
+            {/* Profile Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
                 <button
-                  onClick={isAdmin ? logout : login}
-                  className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
-                  aria-label={isAdmin ? "Logout" : "Login as Admin"}
+                  className="h-9 flex items-center gap-1 px-2 rounded-lg hover:bg-secondary transition-colors duration-150"
+                  aria-label="Profile menu"
                 >
-                  {isAdmin ? (
-                    <LogOut className="h-5 w-5 text-muted-foreground" />
-                  ) : (
-                    <LogIn className="h-5 w-5 text-muted-foreground" />
-                  )}
+                  <div className={`h-7 w-7 rounded-full flex items-center justify-center ${isAdmin ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}>
+                    <User className="h-4 w-4" />
+                  </div>
+                  <ChevronDown className="h-3 w-3 text-muted-foreground" />
                 </button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{isAdmin ? "Logout" : "Login as Admin"}</p>
-              </TooltipContent>
-            </Tooltip>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                {isAdmin ? (
+                  <>
+                    <DropdownMenuLabel className="flex items-center gap-2">
+                      <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+                        <User className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="font-medium">Admin User</p>
+                        <p className="text-xs text-muted-foreground">admin@baserank.com</p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/admin" className="cursor-pointer">
+                        <Settings className="mr-2 h-4 w-4" />
+                        Admin Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logout} className="cursor-pointer text-destructive focus:text-destructive">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Log out
+                    </DropdownMenuItem>
+                  </>
+                ) : (
+                  <>
+                    <DropdownMenuLabel>Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={login} className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      Sign in
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={login} className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      Sign in as Admin
+                    </DropdownMenuItem>
+                  </>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
             
             {/* Dark mode toggle - desktop only */}
             <button
@@ -193,13 +221,32 @@ export function Header() {
                       </div>
                     </>
                   )}
-                  <button
-                    onClick={isAdmin ? logout : login}
-                    className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
-                  >
-                    {isAdmin ? <LogOut className="h-5 w-5" /> : <LogIn className="h-5 w-5" />}
-                    {isAdmin ? "Logout" : "Login as Admin"}
-                  </button>
+                  {isAdmin ? (
+                    <button
+                      onClick={logout}
+                      className="flex items-center gap-3 px-3 py-3 w-full text-base text-destructive hover:bg-secondary rounded-lg transition-colors duration-150"
+                    >
+                      <LogOut className="h-5 w-5" />
+                      Log out
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        onClick={login}
+                        className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
+                      >
+                        <User className="h-5 w-5" />
+                        Sign in
+                      </button>
+                      <button
+                        onClick={login}
+                        className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
+                      >
+                        <User className="h-5 w-5" />
+                        Sign in as Admin
+                      </button>
+                    </>
+                  )}
                   <button
                     onClick={() => setIsDark(!isDark)}
                     className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
