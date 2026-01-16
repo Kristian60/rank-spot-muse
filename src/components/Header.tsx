@@ -1,4 +1,4 @@
-import { Moon, Sun, User, Menu, Shield, LogOut, Settings, ChevronDown } from "lucide-react";
+import { Moon, Sun, User, Menu, Shield, LogOut, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
@@ -17,13 +17,16 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 const navItems = [
   { label: "Rankings", href: "/rankings" },
@@ -35,6 +38,9 @@ const navItems = [
 export function Header() {
   const [isDark, setIsDark] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { isAdmin, isAdminMode, toggleAdminMode, login, logout } = useAdmin();
 
   useEffect(() => {
@@ -45,6 +51,16 @@ export function Header() {
       root.classList.remove("dark");
     }
   }, [isDark]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Mock login - in real app this would check credentials
+    // For demo: admin@baserank.com logs in as admin, others as regular user
+    login();
+    setLoginOpen(false);
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <header className="bg-transparent">
@@ -91,60 +107,69 @@ export function Header() {
               </Tooltip>
             )}
 
-            {/* Profile Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  className="h-9 flex items-center gap-1 px-2 rounded-lg hover:bg-secondary transition-colors duration-150"
-                  aria-label="Profile menu"
-                >
-                  <div className={`h-7 w-7 rounded-full flex items-center justify-center ${isAdmin ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}>
+            {/* Profile Icon with Login Dialog */}
+            {isAdmin ? (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={logout}
+                    className="h-9 w-9 rounded-full flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-150"
+                    aria-label="Logout"
+                  >
                     <User className="h-4 w-4" />
-                  </div>
-                  <ChevronDown className="h-3 w-3 text-muted-foreground" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                {isAdmin ? (
-                  <>
-                    <DropdownMenuLabel className="flex items-center gap-2">
-                      <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
-                        <User className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="font-medium">Admin User</p>
-                        <p className="text-xs text-muted-foreground">admin@baserank.com</p>
-                      </div>
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
-                      <Link to="/admin" className="cursor-pointer">
-                        <Settings className="mr-2 h-4 w-4" />
-                        Admin Dashboard
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={logout} className="cursor-pointer text-destructive focus:text-destructive">
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Log out
-                    </DropdownMenuItem>
-                  </>
-                ) : (
-                  <>
-                    <DropdownMenuLabel>Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={login} className="cursor-pointer">
-                      <User className="mr-2 h-4 w-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Logged in as Admin - Click to logout</p>
+                </TooltipContent>
+              </Tooltip>
+            ) : (
+              <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
+                <DialogTrigger asChild>
+                  <button
+                    className="h-9 w-9 rounded-full flex items-center justify-center bg-muted hover:bg-secondary transition-colors duration-150"
+                    aria-label="Login"
+                  >
+                    <User className="h-4 w-4 text-muted-foreground" />
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Sign in</DialogTitle>
+                    <DialogDescription>
+                      Enter your credentials to access your account
+                    </DialogDescription>
+                  </DialogHeader>
+                  <form onSubmit={handleLogin} className="space-y-4 pt-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="admin@baserank.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="password">Password</Label>
+                      <Input
+                        id="password"
+                        type="password"
+                        placeholder="••••••••"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <Button type="submit" className="w-full">
                       Sign in
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={login} className="cursor-pointer">
-                      <User className="mr-2 h-4 w-4" />
-                      Sign in as Admin
-                    </DropdownMenuItem>
-                  </>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
+                    </Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
+            )}
             
             {/* Dark mode toggle - desktop only */}
             <button
@@ -221,32 +246,26 @@ export function Header() {
                       </div>
                     </>
                   )}
-                  {isAdmin ? (
-                    <button
-                      onClick={logout}
-                      className="flex items-center gap-3 px-3 py-3 w-full text-base text-destructive hover:bg-secondary rounded-lg transition-colors duration-150"
-                    >
-                      <LogOut className="h-5 w-5" />
-                      Log out
-                    </button>
-                  ) : (
-                    <>
-                      <button
-                        onClick={login}
-                        className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
-                      >
-                        <User className="h-5 w-5" />
-                        Sign in
-                      </button>
-                      <button
-                        onClick={login}
-                        className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
-                      >
-                        <User className="h-5 w-5" />
-                        Sign in as Admin
-                      </button>
-                    </>
-                  )}
+                {isAdmin ? (
+                  <button
+                    onClick={logout}
+                    className="flex items-center gap-3 px-3 py-3 w-full text-base text-destructive hover:bg-secondary rounded-lg transition-colors duration-150"
+                  >
+                    <LogOut className="h-5 w-5" />
+                    Log out
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      setLoginOpen(true);
+                    }}
+                    className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
+                  >
+                    <User className="h-5 w-5" />
+                    Sign in
+                  </button>
+                )}
                   <button
                     onClick={() => setIsDark(!isDark)}
                     className="flex items-center gap-3 px-3 py-3 w-full text-base text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors duration-150"
