@@ -147,14 +147,30 @@ export function Header() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle>{isSignUp ? "Create account" : "Sign in"}</DialogTitle>
+                    <DialogTitle>Welcome to BaseRank</DialogTitle>
                     <DialogDescription>
-                      {isSignUp 
-                        ? "Enter your details to create a new account" 
-                        : "Enter your credentials to access your account"}
+                      Sign in to your account or create a new one
                     </DialogDescription>
                   </DialogHeader>
-                  <form onSubmit={handleSubmit} className="space-y-4 pt-4">
+                  <div className="flex gap-2 pt-2">
+                    <Button
+                      type="button"
+                      variant={!isSignUp ? "default" : "outline"}
+                      className="flex-1"
+                      onClick={() => { setIsSignUp(false); resetForm(); }}
+                    >
+                      Sign in
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={isSignUp ? "default" : "outline"}
+                      className="flex-1"
+                      onClick={() => { setIsSignUp(true); resetForm(); }}
+                    >
+                      Sign up
+                    </Button>
+                  </div>
+                  <form onSubmit={handleSubmit} className="space-y-4 pt-2">
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
                       <Input
@@ -193,31 +209,6 @@ export function Header() {
                     <Button type="submit" className="w-full">
                       {isSignUp ? "Create account" : "Sign in"}
                     </Button>
-                    <div className="text-center text-sm text-muted-foreground">
-                      {isSignUp ? (
-                        <>
-                          Already have an account?{" "}
-                          <button
-                            type="button"
-                            onClick={() => { setIsSignUp(false); resetForm(); }}
-                            className="text-primary hover:underline"
-                          >
-                            Sign in
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          Don't have an account?{" "}
-                          <button
-                            type="button"
-                            onClick={() => { setIsSignUp(true); resetForm(); }}
-                            className="text-primary hover:underline"
-                          >
-                            Sign up
-                          </button>
-                        </>
-                      )}
-                    </div>
                   </form>
                 </DialogContent>
               </Dialog>
