@@ -111,12 +111,12 @@ export function Header() {
             {isAdmin ? (
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button
+                <button
                     onClick={logout}
-                    className="h-9 w-9 rounded-full flex items-center justify-center bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-150"
+                    className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
                     aria-label="Logout"
                   >
-                    <User className="h-4 w-4" />
+                    <User className="h-5 w-5 text-primary" />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -126,11 +126,11 @@ export function Header() {
             ) : (
               <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
                 <DialogTrigger asChild>
-                  <button
-                    className="h-9 w-9 rounded-full flex items-center justify-center bg-muted hover:bg-secondary transition-colors duration-150"
+                <button
+                    className="h-9 w-9 flex items-center justify-center rounded-lg hover:bg-secondary transition-colors duration-150"
                     aria-label="Login"
                   >
-                    <User className="h-4 w-4 text-muted-foreground" />
+                    <User className="h-5 w-5 text-muted-foreground" />
                   </button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md">
