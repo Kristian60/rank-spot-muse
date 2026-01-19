@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, MapPin, Calendar, Users, Trophy, Medal, Clock } from "lucide-react";
 import { Header } from "@/components/Header";
 import { EditableText } from "@/components/EditableText";
+import { CompetitionAdminPanel } from "@/components/CompetitionAdminPanel";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Table,
@@ -178,6 +179,12 @@ const CompetitionDetail = () => {
             </div>
           </div>
         </div>
+
+        {/* Admin Panel */}
+        <CompetitionAdminPanel 
+          competitionId={competition.id} 
+          competitionName={competition.name} 
+        />
 
         {/* Competition Info Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
