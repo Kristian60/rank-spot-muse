@@ -1,10 +1,12 @@
 import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, Users, Trophy, Medal, Clock } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Users, Trophy, Medal, Clock, Shield } from "lucide-react";
 import { Header } from "@/components/Header";
 import { EditableText } from "@/components/EditableText";
 import { CompetitionAdminPanel } from "@/components/CompetitionAdminPanel";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
+import { useAdmin } from "@/contexts/AdminContext";
 import {
   Table,
   TableBody,
@@ -112,6 +114,7 @@ const CompetitionDetail = () => {
   const [selectedDivision, setSelectedDivision] = useState("Elite Women");
   const [currentPage, setCurrentPage] = useState(1);
   const leaderboard = leaderboards[selectedDivision] || [];
+  const { isAdmin, isAdminMode, toggleAdminMode, login, logout } = useAdmin();
 
   const updateCompetitionField = (field: string, value: string) => {
     setCompetition((prev) => ({ ...prev, [field]: value }));
@@ -138,8 +141,27 @@ const CompetitionDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
       <Header />
+
+      {/* Dev Admin Toggle - Top Right Corner */}
+      <div className="fixed top-20 right-4 z-50 flex items-center gap-2 bg-card border border-border rounded-lg px-3 py-2 shadow-lg">
+        <Shield className={`h-4 w-4 ${isAdmin && isAdminMode ? 'text-primary' : 'text-muted-foreground'}`} />
+        <span className="text-xs font-medium text-muted-foreground">Admin</span>
+        <Switch
+          checked={isAdmin && isAdminMode}
+          onCheckedChange={() => {
+            if (!isAdmin) {
+              login();
+              toggleAdminMode();
+            } else if (isAdminMode) {
+              logout();
+            } else {
+              toggleAdminMode();
+            }
+          }}
+        />
+      </div>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back link */}
