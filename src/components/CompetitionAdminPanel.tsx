@@ -48,12 +48,8 @@ export function CompetitionAdminPanel({ competitionId, competitionName }: Compet
           Quick actions for managing {competitionName}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex items-center justify-between gap-4 py-2 border-b border-border/50 last:border-0">
-          <div className="flex-1">
-            <p className="text-sm font-medium">Assign default nation to athletes</p>
-            <p className="text-xs text-muted-foreground">Sets the competition's host nation for all athletes currently without a nationality assigned.</p>
-          </div>
+      <CardContent className="space-y-6">
+        <div className="flex items-start gap-4 pb-6 border-b border-border">
           <Button
             variant="outline"
             size="sm"
@@ -61,15 +57,14 @@ export function CompetitionAdminPanel({ competitionId, competitionName }: Compet
             className="gap-2 shrink-0"
           >
             <Flag className="h-4 w-4" />
-            Assign
+            Assign nations
           </Button>
+          <div className="pt-0.5">
+            <p className="text-sm text-muted-foreground">Sets the competition's host nation for all athletes currently without a nationality assigned.</p>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between gap-4 py-2 border-b border-border/50 last:border-0">
-          <div className="flex-1">
-            <p className="text-sm font-medium">Recalculate rankings</p>
-            <p className="text-xs text-muted-foreground">Updates all division rankings based on current scores, times, and tiebreaker rules.</p>
-          </div>
+        <div className="flex items-start gap-4 pb-6 border-b border-border">
           <Button
             variant="outline"
             size="sm"
@@ -79,22 +74,24 @@ export function CompetitionAdminPanel({ competitionId, competitionName }: Compet
             <RefreshCw className="h-4 w-4" />
             Recalculate
           </Button>
+          <div className="pt-0.5">
+            <p className="text-sm text-muted-foreground">Updates all division rankings based on current scores, times, and tiebreaker rules.</p>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between gap-4 py-2">
-          <div className="flex-1">
-            <p className="text-sm font-medium">Remove DNF athletes</p>
-            <p className="text-xs text-muted-foreground">Permanently removes all athletes marked as Did Not Finish from this competition's results.</p>
-          </div>
+        <div className="flex items-start gap-4">
           <Button
             variant="outline"
             size="sm"
             onClick={handleClearDNFAthletes}
-            className="gap-2 shrink-0 text-destructive hover:text-destructive"
+            className="gap-2 shrink-0 text-destructive hover:text-destructive border-destructive/30 hover:border-destructive/50"
           >
             <Trash2 className="h-4 w-4" />
-            Remove
+            Remove DNF
           </Button>
+          <div className="pt-0.5">
+            <p className="text-sm text-muted-foreground">Permanently removes all athletes marked as Did Not Finish from this competition's results.</p>
+          </div>
         </div>
       </CardContent>
     </Card>
