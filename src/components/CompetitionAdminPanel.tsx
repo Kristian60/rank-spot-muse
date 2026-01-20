@@ -49,49 +49,43 @@ export function CompetitionAdminPanel({ competitionId, competitionName }: Compet
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="flex items-start gap-4 pb-6 border-b border-border">
+        <div className="flex items-center gap-6 pb-6 border-b border-border">
           <Button
             variant="outline"
             size="sm"
             onClick={handleAssignNations}
-            className="gap-2 shrink-0"
+            className="gap-2 w-40 justify-start"
           >
             <Flag className="h-4 w-4" />
             Assign nations
           </Button>
-          <div className="pt-0.5">
-            <p className="text-sm text-muted-foreground">Sets the competition's host nation for all athletes currently without a nationality assigned.</p>
-          </div>
+          <p className="text-sm text-muted-foreground">Sets the competition's host nation for all athletes currently without a nationality assigned.</p>
         </div>
 
-        <div className="flex items-start gap-4 pb-6 border-b border-border">
+        <div className="flex items-center gap-6 pb-6 border-b border-border">
           <Button
             variant="outline"
             size="sm"
             onClick={handleRecalculateRankings}
-            className="gap-2 shrink-0"
+            className="gap-2 w-40 justify-start"
           >
             <RefreshCw className="h-4 w-4" />
             Recalculate
           </Button>
-          <div className="pt-0.5">
-            <p className="text-sm text-muted-foreground">Updates all division rankings based on current scores, times, and tiebreaker rules.</p>
-          </div>
+          <p className="text-sm text-muted-foreground">Updates all division rankings based on current scores, times, and tiebreaker rules.</p>
         </div>
 
-        <div className="flex items-start gap-4">
+        <div className="flex items-center gap-6">
           <Button
             variant="outline"
             size="sm"
             onClick={handleClearDNFAthletes}
-            className="gap-2 shrink-0 text-destructive hover:text-destructive border-destructive/30 hover:border-destructive/50"
+            className="gap-2 w-40 justify-start text-destructive hover:text-destructive border-destructive/30 hover:border-destructive/50"
           >
             <Trash2 className="h-4 w-4" />
             Remove DNF
           </Button>
-          <div className="pt-0.5">
-            <p className="text-sm text-muted-foreground">Permanently removes all athletes marked as Did Not Finish from this competition's results.</p>
-          </div>
+          <p className="text-sm text-muted-foreground">Permanently removes all athletes marked as Did Not Finish from this competition's results.</p>
         </div>
       </CardContent>
     </Card>
