@@ -48,34 +48,52 @@ export function CompetitionAdminPanel({ competitionId, competitionName }: Compet
           Quick actions for managing {competitionName}
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="flex flex-wrap gap-3">
+      <CardContent className="space-y-4">
+        <div className="flex items-center justify-between gap-4 py-2 border-b border-border/50 last:border-0">
+          <div className="flex-1">
+            <p className="text-sm font-medium">Assign default nation to athletes</p>
+            <p className="text-xs text-muted-foreground">Sets the competition's host nation for all athletes currently without a nationality assigned.</p>
+          </div>
           <Button
             variant="outline"
             size="sm"
             onClick={handleAssignNations}
-            className="gap-2"
+            className="gap-2 shrink-0"
           >
             <Flag className="h-4 w-4" />
-            Assign default nation to athletes
+            Assign
           </Button>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 py-2 border-b border-border/50 last:border-0">
+          <div className="flex-1">
+            <p className="text-sm font-medium">Recalculate rankings</p>
+            <p className="text-xs text-muted-foreground">Updates all division rankings based on current scores, times, and tiebreaker rules.</p>
+          </div>
           <Button
             variant="outline"
             size="sm"
             onClick={handleRecalculateRankings}
-            className="gap-2"
+            className="gap-2 shrink-0"
           >
             <RefreshCw className="h-4 w-4" />
-            Recalculate rankings
+            Recalculate
           </Button>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 py-2">
+          <div className="flex-1">
+            <p className="text-sm font-medium">Remove DNF athletes</p>
+            <p className="text-xs text-muted-foreground">Permanently removes all athletes marked as Did Not Finish from this competition's results.</p>
+          </div>
           <Button
             variant="outline"
             size="sm"
             onClick={handleClearDNFAthletes}
-            className="gap-2 text-destructive hover:text-destructive"
+            className="gap-2 shrink-0 text-destructive hover:text-destructive"
           >
             <Trash2 className="h-4 w-4" />
-            Remove DNF athletes
+            Remove
           </Button>
         </div>
       </CardContent>
