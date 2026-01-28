@@ -89,32 +89,44 @@ function getFormatLabel(format: Competition["format"]) {
   }
 }
 
+const medalColors = [
+  "bg-amber-400/20 text-amber-600 dark:bg-amber-400/10 dark:text-amber-400",
+  "bg-slate-300/30 text-slate-500 dark:bg-slate-400/10 dark:text-slate-400",
+  "bg-orange-300/20 text-orange-600 dark:bg-orange-400/10 dark:text-orange-400",
+];
+
 function PodiumList({ competitors, label }: { competitors: Competitor[]; label: string }) {
   return (
     <div>
-      <div className="text-[11px] text-muted-foreground uppercase tracking-widest mb-2">{label}</div>
-      <div className="space-y-1.5">
+      <div className="text-[10px] text-muted-foreground uppercase tracking-widest mb-3 font-medium">{label}</div>
+      <div className="space-y-2">
         {competitors.map((competitor, i) => {
           const isTeam = competitor.members.length > 1;
           return (
-            <div key={i} className="flex items-start gap-2 text-sm">
-              <span className="w-4 text-muted-foreground text-xs pt-0.5">{i + 1}.</span>
-              {isTeam ? (
-                <span className="text-foreground">
-                  {competitor.members.map((m, idx) => (
-                    <span key={idx}>
-                      <span className="text-sm mr-1">{m.flag}</span>
-                      {m.name}
-                      {idx < competitor.members.length - 1 && <span className="text-muted-foreground mx-1">/</span>}
-                    </span>
-                  ))}
-                </span>
-              ) : (
-                <>
-                  <span className="text-sm">{competitor.members[0].flag}</span>
-                  <span className="text-foreground">{competitor.members[0].name}</span>
-                </>
-              )}
+            <div key={i} className="flex items-start gap-3">
+              <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-semibold shrink-0 ${medalColors[i]}`}>
+                {i + 1}
+              </div>
+              <div className="min-w-0 flex-1">
+                {isTeam ? (
+                  <div className="flex flex-wrap gap-x-1 gap-y-0.5">
+                    {competitor.members.map((m, idx) => (
+                      <span key={idx} className="inline-flex items-center text-sm">
+                        <span className="mr-1 text-xs">{m.flag}</span>
+                        <span className="text-foreground">{m.name.split(' ')[0]}</span>
+                        {idx < competitor.members.length - 1 && (
+                          <span className="text-muted-foreground/40 ml-1">·</span>
+                        )}
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-1.5 text-sm">
+                    <span className="text-xs">{competitor.members[0].flag}</span>
+                    <span className="text-foreground">{competitor.members[0].name}</span>
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}
