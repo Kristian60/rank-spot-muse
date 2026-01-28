@@ -27,7 +27,7 @@ const competitions: Competition[] = [
     women: [
       { rank: 1, members: [{ name: "Tia-Clair Toomey", country: "AUS", flag: "🇦🇺" }] },
       { rank: 2, members: [{ name: "Laura Horvath", country: "HUN", flag: "🇭🇺" }] },
-      { rank: 3, members: [{ name: "Haley Adams", country: "USA", flag: "🇺🇸" }] },
+      { rank: 3, members: [{ name: "Alexandrina-Konstantina Papadopoulos", country: "GRE", flag: "🇬🇷" }] },
     ],
   },
   {
@@ -43,29 +43,13 @@ const competitions: Competition[] = [
     women: [
       { rank: 1, members: [{ name: "Emma Lawson", country: "CAN", flag: "🇨🇦" }, { name: "Gabriela Migała", country: "POL", flag: "🇵🇱" }] },
       { rank: 2, members: [{ name: "Alexis Raptis", country: "USA", flag: "🇺🇸" }, { name: "Brooke Wells", country: "USA", flag: "🇺🇸" }] },
-      { rank: 3, members: [{ name: "Laura Horvath", country: "HUN", flag: "🇭🇺" }, { name: "Emma Tall", country: "SWE", flag: "🇸🇪" }] },
+      { rank: 3, members: [{ name: "Laura Horvath", country: "HUN", flag: "🇭🇺" }, { name: "Bartholomew-Christensen", country: "DEN", flag: "🇩🇰" }] },
     ],
   },
   {
-    name: "Dubai CrossFit Championship",
+    name: "Dubai Championship",
     date: "Dec 2024",
     location: "Dubai, UAE",
-    format: "individual",
-    men: [
-      { rank: 1, members: [{ name: "Brent Fikowski", country: "CAN", flag: "🇨🇦" }] },
-      { rank: 2, members: [{ name: "Lazar Đukić", country: "SRB", flag: "🇷🇸" }] },
-      { rank: 3, members: [{ name: "Jonne Koski", country: "FIN", flag: "🇫🇮" }] },
-    ],
-    women: [
-      { rank: 1, members: [{ name: "Laura Horvath", country: "HUN", flag: "🇭🇺" }] },
-      { rank: 2, members: [{ name: "Brooke Wells", country: "USA", flag: "🇺🇸" }] },
-      { rank: 3, members: [{ name: "Emma Tall", country: "SWE", flag: "🇸🇪" }] },
-    ],
-  },
-  {
-    name: "Wodapalooza",
-    date: "Jan 2025",
-    location: "Miami, FL",
     format: "team-3",
     men: [
       { rank: 1, members: [{ name: "Jeffrey Adler", country: "CAN", flag: "🇨🇦" }, { name: "James Sprague", country: "USA", flag: "🇺🇸" }, { name: "Dallin Pepper", country: "USA", flag: "🇺🇸" }] },
@@ -76,6 +60,22 @@ const competitions: Competition[] = [
       { rank: 1, members: [{ name: "Tia-Clair Toomey", country: "AUS", flag: "🇦🇺" }, { name: "Emma Lawson", country: "CAN", flag: "🇨🇦" }, { name: "Danielle Brandon", country: "USA", flag: "🇺🇸" }] },
       { rank: 2, members: [{ name: "Laura Horvath", country: "HUN", flag: "🇭🇺" }, { name: "Gabriela Migała", country: "POL", flag: "🇵🇱" }, { name: "Haley Adams", country: "USA", flag: "🇺🇸" }] },
       { rank: 3, members: [{ name: "Alexis Raptis", country: "USA", flag: "🇺🇸" }, { name: "Brooke Wells", country: "USA", flag: "🇺🇸" }, { name: "Emma Tall", country: "SWE", flag: "🇸🇪" }] },
+    ],
+  },
+  {
+    name: "Wodapalooza",
+    date: "Jan 2025",
+    location: "Miami, FL",
+    format: "team-4",
+    men: [
+      { rank: 1, members: [{ name: "Jeffrey Adler", country: "CAN", flag: "🇨🇦" }, { name: "James Sprague", country: "USA", flag: "🇺🇸" }, { name: "Dallin Pepper", country: "USA", flag: "🇺🇸" }, { name: "Saxon Panchik", country: "USA", flag: "🇺🇸" }] },
+      { rank: 2, members: [{ name: "Brent Fikowski", country: "CAN", flag: "🇨🇦" }, { name: "Patrick Vellner", country: "CAN", flag: "🇨🇦" }, { name: "Roman Khrennikov", country: "RUS", flag: "🇷🇺" }, { name: "Jonne Koski", country: "FIN", flag: "🇫🇮" }] },
+      { rank: 3, members: [{ name: "Lazar Đukić", country: "SRB", flag: "🇷🇸" }, { name: "Cole Sager", country: "USA", flag: "🇺🇸" }, { name: "Travis Mayer", country: "USA", flag: "🇺🇸" }, { name: "Noah Ohlsen", country: "USA", flag: "🇺🇸" }] },
+    ],
+    women: [
+      { rank: 1, members: [{ name: "Tia-Clair", country: "AUS", flag: "🇦🇺" }, { name: "Emma", country: "CAN", flag: "🇨🇦" }, { name: "Danielle", country: "USA", flag: "🇺🇸" }, { name: "Haley", country: "USA", flag: "🇺🇸" }] },
+      { rank: 2, members: [{ name: "Laura", country: "HUN", flag: "🇭🇺" }, { name: "Gabriela", country: "POL", flag: "🇵🇱" }, { name: "Alexis", country: "USA", flag: "🇺🇸" }, { name: "Brooke", country: "USA", flag: "🇺🇸" }] },
+      { rank: 3, members: [{ name: "Emma Tall", country: "SWE", flag: "🇸🇪" }, { name: "Kristín Holte", country: "NOR", flag: "🇳🇴" }, { name: "Annie Thorisdottir", country: "ISL", flag: "🇮🇸" }, { name: "Sara Sigmundsdottir", country: "ISL", flag: "🇮🇸" }] },
     ],
   },
 ];
