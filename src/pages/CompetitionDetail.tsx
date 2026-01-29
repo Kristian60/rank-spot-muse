@@ -443,7 +443,7 @@ const CompetitionDetail = () => {
                         {athlete.rank}
                       </span>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="pr-1">
                       <div className="flex items-center gap-2">
                         <span>{athlete.flag}</span>
                         <Link
@@ -454,14 +454,14 @@ const CompetitionDetail = () => {
                         </Link>
                       </div>
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell pl-0">
+                    <TableCell className="hidden sm:table-cell px-1">
                       <RankBadges 
                         worldRank={athlete.worldRank} 
                         nationalRank={athlete.nationalRank} 
                         flag={athlete.flag} 
                       />
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell pl-1">
+                    <TableCell className="hidden sm:table-cell px-1">
                       <GamesEmblems history={athlete.gamesHistory} />
                     </TableCell>
                     <TableCell className="hidden sm:table-cell"></TableCell>
