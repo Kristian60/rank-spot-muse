@@ -402,10 +402,10 @@ const CompetitionDetail = () => {
                   <TableHead className="font-medium w-16 text-center">
                     Rank
                   </TableHead>
-                  <TableHead className="font-medium">Athlete</TableHead>
-                  <TableHead className="hidden sm:table-cell"></TableHead>
-                  <TableHead className="hidden sm:table-cell"></TableHead>
-                  <TableHead className="hidden sm:table-cell"></TableHead>
+                  <TableHead className="font-medium w-fit">Athlete</TableHead>
+                  <TableHead className="hidden sm:table-cell w-fit"></TableHead>
+                  <TableHead className="hidden sm:table-cell w-fit"></TableHead>
+                  <TableHead className="hidden sm:table-cell w-full"></TableHead>
                   <TableHead className="font-medium text-center w-20">
                     Points
                   </TableHead>
