@@ -113,13 +113,13 @@ const leaderboards: Record<string, Array<{
   ],
 };
 
-// Games emblem component - cleaner style
+// Games emblem component - cleaner style with G icon
 const GamesEmblem = ({ entry, index }: { entry: GamesEntry; index: number }) => {
   const colorStyles = {
-    gold: { bg: "#facc15", border: "#ca8a04" },
-    silver: { bg: "#d1d5db", border: "#6b7280" },
-    bronze: { bg: "#fb923c", border: "#ea580c" },
-    participated: { bg: "#e5e7eb", border: "#9ca3af" },
+    gold: { bg: "#facc15", border: "#ca8a04", text: "#713f12" },
+    silver: { bg: "#c0c0c0", border: "#71717a", text: "#3f3f46" },
+    bronze: { bg: "#cd7f32", border: "#92400e", text: "#451a03" },
+    participated: { bg: "#f3f4f6", border: "#d1d5db", text: "#9ca3af" },
   };
   
   const style = colorStyles[entry.result];
@@ -130,7 +130,7 @@ const GamesEmblem = ({ entry, index }: { entry: GamesEntry; index: number }) => 
       style={{ 
         marginLeft: index === 0 ? 0 : -5,
         zIndex: 10 - index,
-        boxShadow: "0 1px 2px rgba(0,0,0,0.2)",
+        boxShadow: entry.result !== "participated" ? "0 1px 2px rgba(0,0,0,0.25)" : "none",
         backgroundColor: style.bg,
         borderWidth: 1.5,
         borderStyle: "solid",
@@ -138,16 +138,17 @@ const GamesEmblem = ({ entry, index }: { entry: GamesEntry; index: number }) => 
       }}
       title={`Games: ${entry.result === "participated" ? "Competed" : entry.result.charAt(0).toUpperCase() + entry.result.slice(1)}${entry.team ? " (Team)" : ""}`}
     >
-      {/* Simple cross for Games logo */}
-      <svg viewBox="0 0 10 10" className="w-2 h-2">
-        <rect x="4" y="1" width="2" height="8" fill="rgba(55,65,81,0.5)" />
-        <rect x="1" y="4" width="8" height="2" fill="rgba(55,65,81,0.5)" />
-      </svg>
-      {/* Team superscript */}
+      {/* G for Games */}
+      <span 
+        className="text-[9px] font-black leading-none"
+        style={{ color: style.text }}
+      >
+        G
+      </span>
+      {/* Team superscript - more visible */}
       {entry.team && (
         <span 
-          className="absolute -top-1.5 -right-1 text-[8px] font-bold leading-none"
-          style={{ color: style.border }}
+          className="absolute -top-1.5 -right-1.5 text-[8px] font-black leading-none bg-foreground text-background rounded-full w-3 h-3 flex items-center justify-center"
         >
           T
         </span>
@@ -156,14 +157,14 @@ const GamesEmblem = ({ entry, index }: { entry: GamesEntry; index: number }) => 
   );
 };
 
-// Rank badges component - subtle inline style
+// Rank badges component - subtle pill container
 const RankBadges = ({ worldRank, nationalRank, flag }: { worldRank?: number; nationalRank?: number; flag: string }) => {
   if (!worldRank && !nationalRank) return null;
   
   return (
-    <span className="text-[10px] text-muted-foreground tabular-nums">
+    <span className="inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded-full bg-muted/50 text-[10px] text-muted-foreground tabular-nums">
       {worldRank && <span title={`World Rank #${worldRank}`}>🌍#{worldRank}</span>}
-      {worldRank && nationalRank && <span className="mx-1 opacity-40">|</span>}
+      {worldRank && nationalRank && <span className="opacity-30">|</span>}
       {nationalRank && <span title={`National Rank #${nationalRank}`}>{flag}#{nationalRank}</span>}
     </span>
   );
