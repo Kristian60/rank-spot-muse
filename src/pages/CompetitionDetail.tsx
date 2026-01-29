@@ -157,15 +157,16 @@ const GamesEmblem = ({ entry, index }: { entry: GamesEntry; index: number }) => 
   );
 };
 
-// Rank badges component - subtle pill container
-const RankBadges = ({ worldRank, nationalRank, flag }: { worldRank?: number; nationalRank?: number; flag: string }) => {
-  if (!worldRank && !nationalRank) return null;
+// Rank badge component - with subtle outline
+const RankBadge = ({ rank, icon }: { rank?: number; icon: string }) => {
+  if (!rank) return null;
   
   return (
-    <span className="inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded-full bg-muted/50 text-[10px] text-muted-foreground tabular-nums">
-      {worldRank && <span title={`World Rank #${worldRank}`}>🌍{worldRank}</span>}
-      {worldRank && nationalRank && <span className="opacity-30">|</span>}
-      {nationalRank && <span title={`National Rank #${nationalRank}`}>{flag}{nationalRank}</span>}
+    <span 
+      className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-muted/60 border border-border text-[10px] text-muted-foreground tabular-nums"
+      title={icon === "🌍" ? `World Rank #${rank}` : `National Rank #${rank}`}
+    >
+      {icon}{rank}
     </span>
   );
 };
@@ -403,6 +404,8 @@ const CompetitionDetail = () => {
                     Rank
                   </TableHead>
                   <TableHead className="font-medium">Athlete</TableHead>
+                  <TableHead className="w-14 hidden sm:table-cell"></TableHead>
+                  <TableHead className="w-14 hidden sm:table-cell"></TableHead>
                   <TableHead className="w-24 hidden sm:table-cell"></TableHead>
                   <TableHead className="font-medium text-center w-20">
                     Points
@@ -450,14 +453,13 @@ const CompetitionDetail = () => {
                         >
                           {athlete.name}
                         </Link>
-                        
-                        {/* Rank badges - subtle pill */}
-                        <RankBadges 
-                          worldRank={athlete.worldRank} 
-                          nationalRank={athlete.nationalRank} 
-                          flag={athlete.flag} 
-                        />
                       </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <RankBadge rank={athlete.worldRank} icon="🌍" />
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <RankBadge rank={athlete.nationalRank} icon={athlete.flag} />
                     </TableCell>
                     <TableCell className="hidden sm:table-cell">
                       <GamesEmblems history={athlete.gamesHistory} />
