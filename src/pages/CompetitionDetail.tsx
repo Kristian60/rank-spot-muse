@@ -40,6 +40,7 @@ const mockCompetition = {
 
 // CrossFit Games history type
 type GamesResult = "gold" | "silver" | "bronze" | "participated";
+type GamesEntry = { result: GamesResult; team?: boolean };
 
 // Mock leaderboard data by division - expanded with DNF athletes and accolades
 const leaderboards: Record<string, Array<{
@@ -55,42 +56,42 @@ const leaderboards: Record<string, Array<{
   event4: number | "DNF";
   worldRank?: number;
   nationalRank?: number;
-  gamesHistory?: GamesResult[]; // Most recent first
+  gamesHistory?: GamesEntry[]; // Most recent first
 }>> = {
   "Elite Men": [
-    { rank: 1, athleteId: "1001", name: "Jeffrey Adler", country: "CAN", flag: "🇨🇦", points: 580, event1: 1, event2: 2, event3: 1, event4: 3, worldRank: 1, nationalRank: 1, gamesHistory: ["gold", "silver", "participated", "participated"] },
-    { rank: 2, athleteId: "1002", name: "James Sprague", country: "USA", flag: "🇺🇸", points: 545, event1: 3, event2: 1, event3: 4, event4: 1, worldRank: 3, nationalRank: 1, gamesHistory: ["silver", "participated"] },
-    { rank: 3, athleteId: "1003", name: "Brent Fikowski", country: "CAN", flag: "🇨🇦", points: 520, event1: 2, event2: 5, event3: 2, event4: 2, worldRank: 4, nationalRank: 2, gamesHistory: ["bronze", "participated", "participated", "participated", "participated", "participated"] },
-    { rank: 4, athleteId: "1004", name: "Dallin Pepper", country: "USA", flag: "🇺🇸", points: 498, event1: 4, event2: 3, event3: 5, event4: 4, worldRank: 5, nationalRank: 2, gamesHistory: ["participated", "participated"] },
-    { rank: 5, athleteId: "1005", name: "Patrick Vellner", country: "CAN", flag: "🇨🇦", points: 475, event1: 5, event2: 4, event3: 3, event4: 6, worldRank: 6, nationalRank: 3, gamesHistory: ["bronze", "silver", "bronze", "participated", "participated", "participated", "participated"] },
-    { rank: 6, athleteId: "1006", name: "Roman Khrennikov", country: "RUS", flag: "🇷🇺", points: 456, event1: 6, event2: 6, event3: 6, event4: 5, worldRank: 2, nationalRank: 1, gamesHistory: ["participated"] },
-    { rank: 7, athleteId: "1007", name: "Lazar Đukić", country: "SRB", flag: "🇷🇸", points: 432, event1: 7, event2: 8, event3: 7, event4: 7, worldRank: 8, nationalRank: 1, gamesHistory: ["participated", "participated", "participated"] },
-    { rank: 8, athleteId: "1008", name: "Jonne Koski", country: "FIN", flag: "🇫🇮", points: 410, event1: 8, event2: 7, event3: 9, event4: 8, worldRank: 12, nationalRank: 1, gamesHistory: ["participated", "participated", "participated", "participated"] },
-    { rank: 9, athleteId: "1009", name: "Ricky Garard", country: "AUS", flag: "🇦🇺", points: 395, event1: 9, event2: 9, event3: 8, event4: 10, worldRank: 10, nationalRank: 1, gamesHistory: ["bronze", "participated"] },
+    { rank: 1, athleteId: "1001", name: "Jeffrey Adler", country: "CAN", flag: "🇨🇦", points: 580, event1: 1, event2: 2, event3: 1, event4: 3, worldRank: 1, nationalRank: 1, gamesHistory: [{ result: "gold" }, { result: "silver" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 2, athleteId: "1002", name: "James Sprague", country: "USA", flag: "🇺🇸", points: 545, event1: 3, event2: 1, event3: 4, event4: 1, worldRank: 3, nationalRank: 1, gamesHistory: [{ result: "silver" }, { result: "participated" }] },
+    { rank: 3, athleteId: "1003", name: "Brent Fikowski", country: "CAN", flag: "🇨🇦", points: 520, event1: 2, event2: 5, event3: 2, event4: 2, worldRank: 4, nationalRank: 2, gamesHistory: [{ result: "bronze" }, { result: "participated" }, { result: "participated" }, { result: "gold", team: true }, { result: "participated" }, { result: "participated" }] },
+    { rank: 4, athleteId: "1004", name: "Dallin Pepper", country: "USA", flag: "🇺🇸", points: 498, event1: 4, event2: 3, event3: 5, event4: 4, worldRank: 5, nationalRank: 2, gamesHistory: [{ result: "participated" }, { result: "participated" }] },
+    { rank: 5, athleteId: "1005", name: "Patrick Vellner", country: "CAN", flag: "🇨🇦", points: 475, event1: 5, event2: 4, event3: 3, event4: 6, worldRank: 6, nationalRank: 3, gamesHistory: [{ result: "bronze" }, { result: "silver" }, { result: "bronze" }, { result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 6, athleteId: "1006", name: "Roman Khrennikov", country: "RUS", flag: "🇷🇺", points: 456, event1: 6, event2: 6, event3: 6, event4: 5, worldRank: 2, nationalRank: 1, gamesHistory: [{ result: "participated" }] },
+    { rank: 7, athleteId: "1007", name: "Lazar Đukić", country: "SRB", flag: "🇷🇸", points: 432, event1: 7, event2: 8, event3: 7, event4: 7, worldRank: 8, nationalRank: 1, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 8, athleteId: "1008", name: "Jonne Koski", country: "FIN", flag: "🇫🇮", points: 410, event1: 8, event2: 7, event3: 9, event4: 8, worldRank: 12, nationalRank: 1, gamesHistory: [{ result: "participated" }, { result: "silver", team: true }, { result: "participated" }, { result: "participated" }] },
+    { rank: 9, athleteId: "1009", name: "Ricky Garard", country: "AUS", flag: "🇦🇺", points: 395, event1: 9, event2: 9, event3: 8, event4: 10, worldRank: 10, nationalRank: 1, gamesHistory: [{ result: "bronze" }, { result: "participated" }] },
     { rank: 10, athleteId: "1010", name: "Cole Greashaber", country: "USA", flag: "🇺🇸", points: 378, event1: 10, event2: 10, event3: 10, event4: 9, worldRank: 15, nationalRank: 5 },
-    { rank: 11, athleteId: "1011", name: "Travis Mayer", country: "USA", flag: "🇺🇸", points: 362, event1: 11, event2: 11, event3: 11, event4: 11, worldRank: 18, nationalRank: 6, gamesHistory: ["participated", "participated", "participated", "participated", "participated"] },
-    { rank: 12, athleteId: "1012", name: "Björgvin Karl Gudmundsson", country: "ISL", flag: "🇮🇸", points: 345, event1: 12, event2: 13, event3: 12, event4: 12, worldRank: 20, nationalRank: 1, gamesHistory: ["participated", "participated", "participated", "participated", "participated", "participated"] },
-    { rank: 13, athleteId: "1013", name: "Saxon Panchik", country: "USA", flag: "🇺🇸", points: 330, event1: 14, event2: 12, event3: 13, event4: 13, worldRank: 22, nationalRank: 7, gamesHistory: ["participated", "participated"] },
-    { rank: 14, athleteId: "1014", name: "Jayson Hopper", country: "USA", flag: "🇺🇸", points: 315, event1: 13, event2: 14, event3: 14, event4: 15, worldRank: 25, nationalRank: 8, gamesHistory: ["participated", "participated", "participated"] },
-    { rank: 15, athleteId: "1015", name: "Harry Lightfoot", country: "GBR", flag: "🇬🇧", points: 298, event1: 15, event2: 15, event3: 16, event4: 14, worldRank: 28, nationalRank: 1, gamesHistory: ["participated"] },
-    { rank: "DNF", athleteId: "1016", name: "Noah Ohlsen", country: "USA", flag: "🇺🇸", points: null, event1: 16, event2: "DNF", event3: "DNF", event4: "DNF", worldRank: 11, nationalRank: 4, gamesHistory: ["participated", "participated", "participated", "participated", "participated", "participated"] },
-    { rank: "DNF", athleteId: "1017", name: "Cole Sager", country: "USA", flag: "🇺🇸", points: null, event1: 17, event2: 16, event3: "DNF", event4: "DNF", worldRank: 35, nationalRank: 12, gamesHistory: ["participated", "participated"] },
+    { rank: 11, athleteId: "1011", name: "Travis Mayer", country: "USA", flag: "🇺🇸", points: 362, event1: 11, event2: 11, event3: 11, event4: 11, worldRank: 18, nationalRank: 6, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "bronze", team: true }, { result: "participated", team: true }, { result: "participated" }] },
+    { rank: 12, athleteId: "1012", name: "Björgvin Karl Gudmundsson", country: "ISL", flag: "🇮🇸", points: 345, event1: 12, event2: 13, event3: 12, event4: 12, worldRank: 20, nationalRank: 1, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 13, athleteId: "1013", name: "Saxon Panchik", country: "USA", flag: "🇺🇸", points: 330, event1: 14, event2: 12, event3: 13, event4: 13, worldRank: 22, nationalRank: 7, gamesHistory: [{ result: "participated" }, { result: "participated" }] },
+    { rank: 14, athleteId: "1014", name: "Jayson Hopper", country: "USA", flag: "🇺🇸", points: 315, event1: 13, event2: 14, event3: 14, event4: 15, worldRank: 25, nationalRank: 8, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 15, athleteId: "1015", name: "Harry Lightfoot", country: "GBR", flag: "🇬🇧", points: 298, event1: 15, event2: 15, event3: 16, event4: 14, worldRank: 28, nationalRank: 1, gamesHistory: [{ result: "participated" }] },
+    { rank: "DNF", athleteId: "1016", name: "Noah Ohlsen", country: "USA", flag: "🇺🇸", points: null, event1: 16, event2: "DNF", event3: "DNF", event4: "DNF", worldRank: 11, nationalRank: 4, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: "DNF", athleteId: "1017", name: "Cole Sager", country: "USA", flag: "🇺🇸", points: null, event1: 17, event2: 16, event3: "DNF", event4: "DNF", worldRank: 35, nationalRank: 12, gamesHistory: [{ result: "participated" }, { result: "participated" }] },
   ],
   "Elite Women": [
-    { rank: 1, athleteId: "2001", name: "Tia-Clair Toomey", country: "AUS", flag: "🇦🇺", points: 600, event1: 1, event2: 1, event3: 1, event4: 1, worldRank: 1, nationalRank: 1, gamesHistory: ["gold", "gold", "gold", "gold", "gold", "gold", "silver"] },
-    { rank: 2, athleteId: "3638", name: "Laura Horvath", country: "HUN", flag: "🇭🇺", points: 555, event1: 2, event2: 3, event3: 2, event4: 2, worldRank: 2, nationalRank: 1, gamesHistory: ["silver", "participated", "participated", "bronze", "participated"] },
-    { rank: 3, athleteId: "2003", name: "Emma Lawson", country: "CAN", flag: "🇨🇦", points: 528, event1: 3, event2: 2, event3: 4, event4: 3, worldRank: 3, nationalRank: 1, gamesHistory: ["bronze", "participated"] },
-    { rank: 4, athleteId: "2004", name: "Haley Adams", country: "USA", flag: "🇺🇸", points: 502, event1: 4, event2: 4, event3: 3, event4: 5, worldRank: 4, nationalRank: 1, gamesHistory: ["participated", "participated", "participated", "participated"] },
-    { rank: 5, athleteId: "2005", name: "Gabriela Migała", country: "POL", flag: "🇵🇱", points: 478, event1: 5, event2: 5, event3: 6, event4: 4, worldRank: 5, nationalRank: 1, gamesHistory: ["participated", "participated", "participated"] },
-    { rank: 6, athleteId: "2006", name: "Danielle Brandon", country: "USA", flag: "🇺🇸", points: 445, event1: 6, event2: 7, event3: 5, event4: 6, worldRank: 9, nationalRank: 3, gamesHistory: ["participated", "participated", "participated", "participated"] },
-    { rank: 7, athleteId: "2007", name: "Alexis Raptis", country: "USA", flag: "🇺🇸", points: 420, event1: 7, event2: 6, event3: 8, event4: 7, worldRank: 7, nationalRank: 2, gamesHistory: ["participated", "participated"] },
-    { rank: 8, athleteId: "2008", name: "Brooke Wells", country: "USA", flag: "🇺🇸", points: 398, event1: 8, event2: 8, event3: 7, event4: 9, worldRank: 12, nationalRank: 5, gamesHistory: ["participated", "participated", "participated", "participated", "participated", "participated"] },
-    { rank: 9, athleteId: "2009", name: "Amanda Barnhart", country: "USA", flag: "🇺🇸", points: 375, event1: 9, event2: 10, event3: 9, event4: 8, worldRank: 14, nationalRank: 6, gamesHistory: ["participated", "participated", "participated", "participated"] },
-    { rank: 10, athleteId: "2010", name: "Paige Semenza", country: "USA", flag: "🇺🇸", points: 358, event1: 10, event2: 9, event3: 11, event4: 10, worldRank: 16, nationalRank: 7, gamesHistory: ["participated"] },
-    { rank: 11, athleteId: "2011", name: "Arielle Loewen", country: "USA", flag: "🇺🇸", points: 340, event1: 11, event2: 11, event3: 10, event4: 12, worldRank: 18, nationalRank: 8, gamesHistory: ["participated", "participated", "participated"] },
+    { rank: 1, athleteId: "2001", name: "Tia-Clair Toomey", country: "AUS", flag: "🇦🇺", points: 600, event1: 1, event2: 1, event3: 1, event4: 1, worldRank: 1, nationalRank: 1, gamesHistory: [{ result: "gold" }, { result: "gold" }, { result: "gold" }, { result: "gold" }, { result: "gold" }, { result: "gold" }] },
+    { rank: 2, athleteId: "3638", name: "Laura Horvath", country: "HUN", flag: "🇭🇺", points: 555, event1: 2, event2: 3, event3: 2, event4: 2, worldRank: 2, nationalRank: 1, gamesHistory: [{ result: "silver" }, { result: "participated" }, { result: "participated" }, { result: "bronze" }, { result: "participated" }] },
+    { rank: 3, athleteId: "2003", name: "Emma Lawson", country: "CAN", flag: "🇨🇦", points: 528, event1: 3, event2: 2, event3: 4, event4: 3, worldRank: 3, nationalRank: 1, gamesHistory: [{ result: "bronze" }, { result: "participated" }] },
+    { rank: 4, athleteId: "2004", name: "Haley Adams", country: "USA", flag: "🇺🇸", points: 502, event1: 4, event2: 4, event3: 3, event4: 5, worldRank: 4, nationalRank: 1, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 5, athleteId: "2005", name: "Gabriela Migała", country: "POL", flag: "🇵🇱", points: 478, event1: 5, event2: 5, event3: 6, event4: 4, worldRank: 5, nationalRank: 1, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 6, athleteId: "2006", name: "Danielle Brandon", country: "USA", flag: "🇺🇸", points: 445, event1: 6, event2: 7, event3: 5, event4: 6, worldRank: 9, nationalRank: 3, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 7, athleteId: "2007", name: "Alexis Raptis", country: "USA", flag: "🇺🇸", points: 420, event1: 7, event2: 6, event3: 8, event4: 7, worldRank: 7, nationalRank: 2, gamesHistory: [{ result: "participated" }, { result: "participated" }] },
+    { rank: 8, athleteId: "2008", name: "Brooke Wells", country: "USA", flag: "🇺🇸", points: 398, event1: 8, event2: 8, event3: 7, event4: 9, worldRank: 12, nationalRank: 5, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "gold", team: true }, { result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 9, athleteId: "2009", name: "Amanda Barnhart", country: "USA", flag: "🇺🇸", points: 375, event1: 9, event2: 10, event3: 9, event4: 8, worldRank: 14, nationalRank: 6, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }, { result: "participated" }] },
+    { rank: 10, athleteId: "2010", name: "Paige Semenza", country: "USA", flag: "🇺🇸", points: 358, event1: 10, event2: 9, event3: 11, event4: 10, worldRank: 16, nationalRank: 7, gamesHistory: [{ result: "participated" }] },
+    { rank: 11, athleteId: "2011", name: "Arielle Loewen", country: "USA", flag: "🇺🇸", points: 340, event1: 11, event2: 11, event3: 10, event4: 12, worldRank: 18, nationalRank: 8, gamesHistory: [{ result: "participated" }, { result: "participated" }, { result: "participated" }] },
     { rank: 12, athleteId: "2012", name: "Bethany Flores", country: "USA", flag: "🇺🇸", points: 325, event1: 12, event2: 13, event3: 12, event4: 11, worldRank: 22, nationalRank: 10 },
-    { rank: "DNF", athleteId: "2013", name: "Emily Rolfe", country: "CAN", flag: "🇨🇦", points: null, event1: 13, event2: 12, event3: "DNF", event4: "DNF", worldRank: 15, nationalRank: 2, gamesHistory: ["participated", "participated"] },
-    { rank: "DNF", athleteId: "2014", name: "Annie Thorisdottir", country: "ISL", flag: "🇮🇸", points: null, event1: "DNF", event2: "DNF", event3: "DNF", event4: "DNF", worldRank: 8, nationalRank: 1, gamesHistory: ["participated", "gold", "gold", "participated", "silver", "participated", "participated", "participated"] },
+    { rank: "DNF", athleteId: "2013", name: "Emily Rolfe", country: "CAN", flag: "🇨🇦", points: null, event1: 13, event2: 12, event3: "DNF", event4: "DNF", worldRank: 15, nationalRank: 2, gamesHistory: [{ result: "participated" }, { result: "participated" }] },
+    { rank: "DNF", athleteId: "2014", name: "Annie Thorisdottir", country: "ISL", flag: "🇮🇸", points: null, event1: "DNF", event2: "DNF", event3: "DNF", event4: "DNF", worldRank: 8, nationalRank: 1, gamesHistory: [{ result: "participated" }, { result: "gold" }, { result: "gold" }, { result: "participated" }, { result: "silver" }, { result: "participated" }] },
   ],
   "Intermediate Men": [
     { rank: 1, athleteId: "3001", name: "Marcus Chen", country: "USA", flag: "🇺🇸", points: 520, event1: 1, event2: 2, event3: 1, event4: 2, worldRank: 45, nationalRank: 15 },
@@ -103,17 +104,17 @@ const leaderboards: Record<string, Array<{
     { rank: 3, athleteId: "4003", name: "Claire Dubois", country: "FRA", flag: "🇫🇷", points: 462, event1: 3, event2: 3, event3: 3, event4: 2, worldRank: 55, nationalRank: 1 },
   ],
   "Masters 35-39": [
-    { rank: 1, athleteId: "5001", name: "Jason Carroll", country: "USA", flag: "🇺🇸", points: 490, event1: 1, event2: 1, event3: 2, event4: 1, worldRank: 1, nationalRank: 1, gamesHistory: ["gold", "silver"] },
-    { rank: 2, athleteId: "5002", name: "David Smith", country: "GBR", flag: "🇬🇧", points: 465, event1: 2, event2: 2, event3: 1, event4: 2, worldRank: 3, nationalRank: 1, gamesHistory: ["participated"] },
+    { rank: 1, athleteId: "5001", name: "Jason Carroll", country: "USA", flag: "🇺🇸", points: 490, event1: 1, event2: 1, event3: 2, event4: 1, worldRank: 1, nationalRank: 1, gamesHistory: [{ result: "gold" }, { result: "silver" }] },
+    { rank: 2, athleteId: "5002", name: "David Smith", country: "GBR", flag: "🇬🇧", points: 465, event1: 2, event2: 2, event3: 1, event4: 2, worldRank: 3, nationalRank: 1, gamesHistory: [{ result: "participated" }] },
   ],
   "Masters 40-44": [
-    { rank: 1, athleteId: "6001", name: "Michael Torres", country: "USA", flag: "🇺🇸", points: 475, event1: 1, event2: 2, event3: 1, event4: 1, worldRank: 2, nationalRank: 1, gamesHistory: ["bronze", "participated", "participated"] },
+    { rank: 1, athleteId: "6001", name: "Michael Torres", country: "USA", flag: "🇺🇸", points: 475, event1: 1, event2: 2, event3: 1, event4: 1, worldRank: 2, nationalRank: 1, gamesHistory: [{ result: "bronze" }, { result: "participated" }, { result: "participated" }] },
     { rank: 2, athleteId: "6002", name: "Peter Larsson", country: "SWE", flag: "🇸🇪", points: 450, event1: 2, event2: 1, event3: 2, event4: 2, worldRank: 5, nationalRank: 1 },
   ],
 };
 
-// Games emblem component with pixel-art style
-const GamesEmblem = ({ result, index }: { result: GamesResult; index: number }) => {
+// Games emblem component - cleaner style
+const GamesEmblem = ({ entry, index }: { entry: GamesEntry; index: number }) => {
   const colorStyles = {
     gold: { bg: "#facc15", border: "#ca8a04" },
     silver: { bg: "#d1d5db", border: "#6b7280" },
@@ -121,46 +122,49 @@ const GamesEmblem = ({ result, index }: { result: GamesResult; index: number }) 
     participated: { bg: "#e5e7eb", border: "#9ca3af" },
   };
   
-  const style = colorStyles[result];
+  const style = colorStyles[entry.result];
   
   return (
     <div
-      className="w-4 h-4 rounded-sm flex items-center justify-center"
+      className="relative w-4 h-4 rounded-sm flex items-center justify-center"
       style={{ 
-        marginLeft: index === 0 ? 0 : -6,
+        marginLeft: index === 0 ? 0 : -5,
         zIndex: 10 - index,
-        imageRendering: "pixelated",
-        boxShadow: "1px 1px 0 rgba(0,0,0,0.3)",
+        boxShadow: "0 1px 2px rgba(0,0,0,0.2)",
         backgroundColor: style.bg,
-        borderWidth: 2,
+        borderWidth: 1.5,
         borderStyle: "solid",
         borderColor: style.border,
       }}
-      title={`Games: ${result === "participated" ? "Competed" : result.charAt(0).toUpperCase() + result.slice(1)}`}
+      title={`Games: ${entry.result === "participated" ? "Competed" : entry.result.charAt(0).toUpperCase() + entry.result.slice(1)}${entry.team ? " (Team)" : ""}`}
     >
-      {/* Pixel cross pattern for Games logo */}
-      <svg viewBox="0 0 8 8" className="w-2 h-2" style={{ imageRendering: "pixelated" }}>
-        <rect x="3" y="0" width="2" height="8" fill="rgba(55,65,81,0.6)" />
-        <rect x="0" y="3" width="8" height="2" fill="rgba(55,65,81,0.6)" />
+      {/* Simple cross for Games logo */}
+      <svg viewBox="0 0 10 10" className="w-2 h-2">
+        <rect x="4" y="1" width="2" height="8" fill="rgba(55,65,81,0.5)" />
+        <rect x="1" y="4" width="8" height="2" fill="rgba(55,65,81,0.5)" />
       </svg>
+      {/* Team superscript */}
+      {entry.team && (
+        <span 
+          className="absolute -top-1.5 -right-1 text-[8px] font-bold leading-none"
+          style={{ color: style.border }}
+        >
+          T
+        </span>
+      )}
     </div>
   );
 };
 
-// Rank badge component
-const RankBadge = ({ rank, type, flag }: { rank: number; type: "world" | "national"; flag?: string }) => {
-  const isTop10 = rank <= 10;
+// Rank badges component - subtle inline style
+const RankBadges = ({ worldRank, nationalRank, flag }: { worldRank?: number; nationalRank?: number; flag: string }) => {
+  if (!worldRank && !nationalRank) return null;
+  
   return (
-    <span
-      className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold ${
-        isTop10 
-          ? "bg-primary/10 text-primary" 
-          : "bg-muted text-muted-foreground"
-      }`}
-      title={type === "world" ? `World Rank #${rank}` : `National Rank #${rank}`}
-    >
-      {type === "world" ? "🌍" : flag}
-      <span className="tabular-nums">#{rank}</span>
+    <span className="text-[10px] text-muted-foreground tabular-nums">
+      {worldRank && <span title={`World Rank #${worldRank}`}>🌍#{worldRank}</span>}
+      {worldRank && nationalRank && <span className="mx-1 opacity-40">|</span>}
+      {nationalRank && <span title={`National Rank #${nationalRank}`}>{flag}#{nationalRank}</span>}
     </span>
   );
 };
@@ -419,19 +423,18 @@ const CompetitionDetail = () => {
                           {athlete.name}
                         </Link>
                         
-                        {/* Rank badges */}
-                        {athlete.worldRank && (
-                          <RankBadge rank={athlete.worldRank} type="world" />
-                        )}
-                        {athlete.nationalRank && (
-                          <RankBadge rank={athlete.nationalRank} type="national" flag={athlete.flag} />
-                        )}
+                        {/* Rank badges - subtle inline */}
+                        <RankBadges 
+                          worldRank={athlete.worldRank} 
+                          nationalRank={athlete.nationalRank} 
+                          flag={athlete.flag} 
+                        />
                         
                         {/* Games history emblems */}
                         {athlete.gamesHistory && athlete.gamesHistory.length > 0 && (
                           <div className="flex items-center ml-1" title={`${athlete.gamesHistory.length} Games appearances`}>
-                            {athlete.gamesHistory.slice(0, 6).map((result, idx) => (
-                              <GamesEmblem key={idx} result={result} index={idx} />
+                            {athlete.gamesHistory.slice(0, 6).map((entry, idx) => (
+                              <GamesEmblem key={idx} entry={entry} index={idx} />
                             ))}
                           </div>
                         )}
