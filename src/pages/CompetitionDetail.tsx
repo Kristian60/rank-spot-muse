@@ -443,7 +443,7 @@ const CompetitionDetail = () => {
                         {athlete.rank}
                       </span>
                     </TableCell>
-                    <TableCell className="pr-2 whitespace-nowrap">
+                    <TableCell className="pr-2.5 whitespace-nowrap">
                       <div className="flex items-center gap-2">
                         <span>{athlete.flag}</span>
                         <Link
