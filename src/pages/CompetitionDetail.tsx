@@ -404,6 +404,8 @@ const CompetitionDetail = () => {
                   </TableHead>
                   <TableHead className="font-medium">Athlete</TableHead>
                   <TableHead className="hidden sm:table-cell"></TableHead>
+                  <TableHead className="hidden sm:table-cell"></TableHead>
+                  <TableHead className="hidden sm:table-cell"></TableHead>
                   <TableHead className="font-medium text-center w-20">
                     Points
                   </TableHead>
@@ -450,13 +452,17 @@ const CompetitionDetail = () => {
                         >
                           {athlete.name}
                         </Link>
-                        <RankBadges 
-                          worldRank={athlete.worldRank} 
-                          nationalRank={athlete.nationalRank} 
-                          flag={athlete.flag} 
-                        />
-                        <GamesEmblems history={athlete.gamesHistory} />
                       </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <RankBadges 
+                        worldRank={athlete.worldRank} 
+                        nationalRank={athlete.nationalRank} 
+                        flag={athlete.flag} 
+                      />
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <GamesEmblems history={athlete.gamesHistory} />
                     </TableCell>
                     <TableCell className="hidden sm:table-cell"></TableCell>
                     <TableCell className="text-center font-bold text-foreground">
