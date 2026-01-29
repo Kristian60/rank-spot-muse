@@ -402,10 +402,10 @@ const CompetitionDetail = () => {
                   <TableHead className="font-medium w-16 text-center">
                     Rank
                   </TableHead>
-                  <TableHead className="font-medium w-fit">Athlete</TableHead>
-                  <TableHead className="hidden sm:table-cell w-fit"></TableHead>
-                  <TableHead className="hidden sm:table-cell w-fit"></TableHead>
-                  <TableHead className="hidden sm:table-cell w-full"></TableHead>
+                  <TableHead className="font-medium whitespace-nowrap">Athlete</TableHead>
+                  <TableHead className="hidden sm:table-cell p-0 w-0"></TableHead>
+                  <TableHead className="hidden sm:table-cell p-0 w-0"></TableHead>
+                  <TableHead className="hidden sm:table-cell"></TableHead>
                   <TableHead className="font-medium text-center w-20">
                     Points
                   </TableHead>
@@ -443,7 +443,7 @@ const CompetitionDetail = () => {
                         {athlete.rank}
                       </span>
                     </TableCell>
-                    <TableCell className="pr-1">
+                    <TableCell className="pr-2 whitespace-nowrap">
                       <div className="flex items-center gap-2">
                         <span>{athlete.flag}</span>
                         <Link
@@ -454,14 +454,14 @@ const CompetitionDetail = () => {
                         </Link>
                       </div>
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell px-1">
+                    <TableCell className="hidden sm:table-cell p-0 pr-2">
                       <RankBadges 
                         worldRank={athlete.worldRank} 
                         nationalRank={athlete.nationalRank} 
                         flag={athlete.flag} 
                       />
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell px-1">
+                    <TableCell className="hidden sm:table-cell p-0">
                       <GamesEmblems history={athlete.gamesHistory} />
                     </TableCell>
                     <TableCell className="hidden sm:table-cell"></TableCell>
