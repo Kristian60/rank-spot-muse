@@ -163,10 +163,36 @@ const RankBadges = ({ worldRank, nationalRank, flag }: { worldRank?: number; nat
   
   return (
     <span className="inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded-full bg-muted/50 text-[10px] text-muted-foreground tabular-nums">
-      {worldRank && <span title={`World Rank #${worldRank}`}>🌍#{worldRank}</span>}
+      {worldRank && <span title={`World Rank #${worldRank}`}>🌍{worldRank}</span>}
       {worldRank && nationalRank && <span className="opacity-30">|</span>}
-      {nationalRank && <span title={`National Rank #${nationalRank}`}>{flag}#{nationalRank}</span>}
+      {nationalRank && <span title={`National Rank #${nationalRank}`}>{flag}{nationalRank}</span>}
     </span>
+  );
+};
+
+// Sort Games entries by importance: gold > silver > bronze > participated, individual > team
+const sortGamesEntries = (entries: GamesEntry[]): GamesEntry[] => {
+  const priority: Record<GamesResult, number> = { gold: 0, silver: 1, bronze: 2, participated: 3 };
+  return [...entries].sort((a, b) => {
+    const medalDiff = priority[a.result] - priority[b.result];
+    if (medalDiff !== 0) return medalDiff;
+    // Individual (no team flag) ranks higher than team
+    return (a.team ? 1 : 0) - (b.team ? 1 : 0);
+  });
+};
+
+// Games emblems component for the dedicated column
+const GamesEmblems = ({ history }: { history?: GamesEntry[] }) => {
+  if (!history || history.length === 0) return null;
+  
+  const sorted = sortGamesEntries(history);
+  
+  return (
+    <div className="flex items-center" title={`${history.length} Games appearances`}>
+      {sorted.slice(0, 6).map((entry, idx) => (
+        <GamesEmblem key={idx} entry={entry} index={idx} />
+      ))}
+    </div>
   );
 };
 
@@ -377,6 +403,7 @@ const CompetitionDetail = () => {
                     Rank
                   </TableHead>
                   <TableHead className="font-medium">Athlete</TableHead>
+                  <TableHead className="w-24 hidden sm:table-cell"></TableHead>
                   <TableHead className="font-medium text-center w-20">
                     Points
                   </TableHead>
@@ -424,22 +451,16 @@ const CompetitionDetail = () => {
                           {athlete.name}
                         </Link>
                         
-                        {/* Rank badges - subtle inline */}
+                        {/* Rank badges - subtle pill */}
                         <RankBadges 
                           worldRank={athlete.worldRank} 
                           nationalRank={athlete.nationalRank} 
                           flag={athlete.flag} 
                         />
-                        
-                        {/* Games history emblems */}
-                        {athlete.gamesHistory && athlete.gamesHistory.length > 0 && (
-                          <div className="flex items-center ml-1" title={`${athlete.gamesHistory.length} Games appearances`}>
-                            {athlete.gamesHistory.slice(0, 6).map((entry, idx) => (
-                              <GamesEmblem key={idx} entry={entry} index={idx} />
-                            ))}
-                          </div>
-                        )}
                       </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <GamesEmblems history={athlete.gamesHistory} />
                     </TableCell>
                     <TableCell className="text-center font-bold text-foreground">
                       {athlete.points ?? "—"}
