@@ -402,9 +402,9 @@ const CompetitionDetail = () => {
                   <TableHead className="font-medium w-16 text-center">
                     Rank
                   </TableHead>
-                  <TableHead className="font-medium whitespace-nowrap">Athlete</TableHead>
-                  <TableHead className="hidden sm:table-cell p-0 w-0"></TableHead>
-                  <TableHead className="hidden sm:table-cell p-0 w-0"></TableHead>
+                  <TableHead className="font-medium w-[1%] whitespace-nowrap">Athlete</TableHead>
+                  <TableHead className="hidden sm:table-cell w-[1%] whitespace-nowrap p-0"></TableHead>
+                  <TableHead className="hidden sm:table-cell w-[1%] whitespace-nowrap p-0"></TableHead>
                   <TableHead className="hidden sm:table-cell"></TableHead>
                   <TableHead className="font-medium text-center w-20">
                     Points
