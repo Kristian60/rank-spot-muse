@@ -162,10 +162,10 @@ const RankBadges = ({ worldRank, nationalRank, flag }: { worldRank?: number; nat
   if (!worldRank && !nationalRank) return null;
   
   return (
-    <span className="inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded-full bg-muted/60 border border-border text-[10px] text-muted-foreground tabular-nums whitespace-nowrap">
-      {worldRank && <span title={`World Rank #${worldRank}`}>🌍{worldRank}</span>}
+    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-muted/60 border border-border text-[10px] text-muted-foreground tabular-nums whitespace-nowrap">
+      {worldRank && <span title={`World Rank #${worldRank}`} className="inline-flex items-center gap-1">🌍 {worldRank}</span>}
       {worldRank && nationalRank && <span className="opacity-40">|</span>}
-      {nationalRank && <span title={`National Rank #${nationalRank}`}>{flag}{nationalRank}</span>}
+      {nationalRank && <span title={`National Rank #${nationalRank}`} className="inline-flex items-center gap-1">{flag} {nationalRank}</span>}
     </span>
   );
 };
@@ -454,14 +454,14 @@ const CompetitionDetail = () => {
                         </Link>
                       </div>
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell">
+                    <TableCell className="hidden sm:table-cell pl-0">
                       <RankBadges 
                         worldRank={athlete.worldRank} 
                         nationalRank={athlete.nationalRank} 
                         flag={athlete.flag} 
                       />
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell">
+                    <TableCell className="hidden sm:table-cell pl-1">
                       <GamesEmblems history={athlete.gamesHistory} />
                     </TableCell>
                     <TableCell className="hidden sm:table-cell"></TableCell>
