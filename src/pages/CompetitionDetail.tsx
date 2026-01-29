@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, Users, Trophy, Medal, Clock, Shield } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Users, Trophy, Medal, Clock, Shield, Globe } from "lucide-react";
 import { Header } from "@/components/Header";
 import { EditableText } from "@/components/EditableText";
 import { CompetitionAdminPanel } from "@/components/CompetitionAdminPanel";
@@ -163,7 +163,7 @@ const RankBadges = ({ worldRank, nationalRank, flag }: { worldRank?: number; nat
   
   return (
     <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-muted/60 border border-border text-[10px] text-muted-foreground tabular-nums whitespace-nowrap">
-      {worldRank && <span title={`World Rank #${worldRank}`} className="inline-flex items-center gap-1">🌍 {worldRank}</span>}
+      {worldRank && <span title={`World Rank #${worldRank}`} className="inline-flex items-center gap-1"><Globe className="h-3 w-3" />{worldRank}</span>}
       {worldRank && nationalRank && <span className="opacity-40">|</span>}
       {nationalRank && <span title={`National Rank #${nationalRank}`} className="inline-flex items-center gap-1">{flag} {nationalRank}</span>}
     </span>
