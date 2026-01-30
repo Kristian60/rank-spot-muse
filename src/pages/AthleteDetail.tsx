@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/Header";
 import { EditableText } from "@/components/EditableText";
+import { InstagramWidget } from "@/components/InstagramWidget";
 import {
   Table,
   TableBody,
@@ -39,6 +40,7 @@ const mockAthlete = {
   gym: { id: "crossfit-mayhem", name: "CrossFit Mayhem" },
   coach: { id: "rich-froning", name: "Rich Froning" },
   achievements: "CrossFit Games Champion 2023, Regional Winner 2022",
+  instagram: "laurahorvatth",
 };
 
 // Mock ranking history data
@@ -363,6 +365,11 @@ const AthleteDetail = () => {
               </ResponsiveContainer>
             </div>
           </div>
+        </div>
+
+        {/* Instagram Widget */}
+        <div className="mb-12">
+          <InstagramWidget username={athlete.instagram} />
         </div>
 
         {/* Competition History */}
